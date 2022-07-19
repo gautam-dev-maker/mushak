@@ -24,6 +24,7 @@
 #include "cmsis_os.h"
 #include "ble_logger.h"
 #include "vl6180x.h"
+#include "as5600.h"
 
 ADC_HandleTypeDef hadc1;
 
@@ -35,11 +36,37 @@ I2C_HandleTypeDef hi2c3;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
-static void MX_I2C2_Init(void);
+// static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 void StartDefaultTask(void *argument);
 
-i2c_dev_t vl6180x_dev;
+void vl6180x_task(void *param)
+{
+  i2c_dev_t vl6180x_dev;
+  vl6180x_init(I2C1, &vl6180x_dev);
+  vl6180x_configure(&vl6180x_dev);
+  uint8_t range;
+  while (vl6180x_measure_distance(&vl6180x_dev, &range) == HAL_OK)
+  {
+    BLE_LOG_E("VL6180x", "Range : %d", range);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+  }
+}
+
+void as5600_task(void *param)
+{
+  i2c_dev_t as5600_dev;
+  as5600_init(I2C2, &as5600_dev);
+
+  while (1)
+  {
+    if (detect_magnet(&as5600_dev) == HAL_OK)
+    {
+      uint16_t magnitude;
+      BLE_LOG_I("AS5600", "Current Magnitude = %d", get_magnitude(&as5600_dev, &magnitude));
+    }
+  }
+}
 
 int main(void)
 {
@@ -48,7 +75,6 @@ int main(void)
 
   MX_GPIO_Init();
   MX_ADC1_Init();
-  MX_I2C2_Init();
   MX_I2C3_Init();
 
   /* BLE log testing */
@@ -56,13 +82,10 @@ int main(void)
   BLE_LOG_E("MAIN", "Muskah is initialising");
 
   /* VL6180x Range Testing */
-  vl6180x_init(I2C1, &vl6180x_dev);
-  vl6180x_configure(&vl6180x_dev);
-  uint8_t range;
-  while (vl6180x_measure_distance(&vl6180x_dev, &range) == HAL_OK)
-  {
-    BLE_LOG_E("VL6180x", "Range : %d", range);
-  }
+  xTaskCreate(&vl6180x_task, "VL6180x Task", 1024, NULL, 2, NULL);
+
+  /* AS5600 Encoder Testing */
+  xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
 }
 
 /**
@@ -154,28 +177,6 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
-}
-
-/**
- * @brief I2C2 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_I2C2_Init(void)
-{
-  hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 100000;
-  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c2.Init.OwnAddress1 = 0;
-  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c2.Init.OwnAddress2 = 0;
-  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
-  {
-    Error_Handler();
-  }
 }
 
 /**

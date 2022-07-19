@@ -43,6 +43,7 @@ Core/Src/stm32f4xx_hal_msp.c \
 Core/Ble_logger/ble_logger.c \
 Core/Peripheral/i2c/i2c.c \
 Core/Vl6180x/vl6180x.c \
+Core/As5600/as5600.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
@@ -143,8 +144,8 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Include \
 -ICore/Ble_logger/ \
 -ICore/Peripheral/i2c/ \
--ICore/Vl6180x/
-
+-ICore/Vl6180x/ \
+-ICore/As5600/
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections

@@ -1,7 +1,7 @@
 /**
  ******************************************************************************
- * @file           : vl6180x.h
- * @brief          : header file for VL6180x Library
+ * @file           : vl6180x.c
+ * @brief          : source code for VL6180x Library
  * @author         : Gautam Agrawal
  *
  * Created on: July 19, 2022
