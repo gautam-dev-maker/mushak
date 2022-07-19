@@ -41,6 +41,8 @@ Core/Src/freertos.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Ble_logger/ble_logger.c \
+Core/Peripheral/i2c/i2c.c \
+Core/Vl6180x/vl6180x.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
@@ -139,7 +141,9 @@ C_INCLUDES =  \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
--ICore/Ble_logger/
+-ICore/Ble_logger/ \
+-ICore/Peripheral/i2c/ \
+-ICore/Vl6180x/
 
 
 # compile gcc flags

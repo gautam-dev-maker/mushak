@@ -23,6 +23,7 @@
 #include "task.h"
 #include "cmsis_os.h"
 #include "ble_logger.h"
+#include "vl6180x.h"
 
 ADC_HandleTypeDef hadc1;
 
@@ -30,29 +31,16 @@ I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
 
-
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
-static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 void StartDefaultTask(void *argument);
 
-/* USER CODE BEGIN PFP */
+i2c_dev_t vl6180x_dev;
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-// #define WHT   "\x1B[37m"
-/**
- * @brief  The application entry point.
- * @retval int
- */
 int main(void)
 {
   HAL_Init();
@@ -60,12 +48,21 @@ int main(void)
 
   MX_GPIO_Init();
   MX_ADC1_Init();
-  MX_I2C1_Init();
   MX_I2C2_Init();
   MX_I2C3_Init();
 
+  /* BLE log testing */
   ble_init(USART1);
-  BLE_LOG_E("MAIN","Hello World");
+  BLE_LOG_E("MAIN", "Muskah is initialising");
+
+  /* VL6180x Range Testing */
+  vl6180x_init(I2C1, &vl6180x_dev);
+  vl6180x_configure(&vl6180x_dev);
+  uint8_t range;
+  while (vl6180x_measure_distance(&vl6180x_dev, &range) == HAL_OK)
+  {
+    BLE_LOG_E("VL6180x", "Range : %d", range);
+  }
 }
 
 /**
@@ -157,29 +154,6 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
-}
-
-/**
- * @brief I2C1 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_I2C1_Init(void)
-{
-
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 100000;
-  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
-    Error_Handler();
-  }
 }
 
 /**
