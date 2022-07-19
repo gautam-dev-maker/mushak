@@ -19,9 +19,9 @@
 
 UART_HandleTypeDef huart1;
 
-HAL_StatusTypeDef ble_init()
+HAL_StatusTypeDef ble_init(USART_TypeDef* instance)
 {
-    huart1.Instance = USART1;
+    huart1.Instance = instance;
     huart1.Init.BaudRate = 9600;
     huart1.Init.WordLength = UART_WORDLENGTH_8B;
     huart1.Init.StopBits = UART_STOPBITS_1;

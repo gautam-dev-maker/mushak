@@ -64,7 +64,7 @@ int main(void)
   MX_I2C2_Init();
   MX_I2C3_Init();
 
-  ble_init();
+  ble_init(USART1);
   BLE_LOG_E("MAIN","Hello World");
 }
 

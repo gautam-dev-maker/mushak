@@ -24,6 +24,11 @@
 #include <string.h>
 #include "stm32f4xx_hal.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define LOG_BUFFER_SIZE 50
 
 #define LOG_COLOR_BLACK "30"
@@ -44,15 +49,15 @@
 
 #define TIMEOUT_MAX 100
 
-typedef enum
-{
-    LOG_NONE,   /*!< No log output */
-    LOG_ERROR,  /*!< Critical errors, software module can not recover on its own */
-    LOG_WARN,   /*!< Error conditions from which recovery measures have been taken */
-    LOG_INFO,   /*!< Information messages which describe normal flow of events */
-    LOG_DEBUG,  /*!< Extra information which is not necessary for normal use (values, pointers, sizes, etc). */
-    LOG_VERBOSE /*!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
-} stm32_log_level_t;
+    typedef enum
+    {
+        LOG_NONE,   /*!< No log output */
+        LOG_ERROR,  /*!< Critical errors, software module can not recover on its own */
+        LOG_WARN,   /*!< Error conditions from which recovery measures have been taken */
+        LOG_INFO,   /*!< Information messages which describe normal flow of events */
+        LOG_DEBUG,  /*!< Extra information which is not necessary for normal use (values, pointers, sizes, etc). */
+        LOG_VERBOSE /*!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
+    } stm32_log_level_t;
 
 #define BLE_LOG_V(TAG, fmt, ...) logger(LOG_VERBOSE, TAG, fmt, ##__VA_ARGS__);
 #define BLE_LOG_D(TAG, fmt, ...) logger(LOG_DEBUG, TAG, fmt, ##__VA_ARGS__);
@@ -60,8 +65,12 @@ typedef enum
 #define BLE_LOG_W(TAG, fmt, ...) logger(LOG_WARN, TAG, fmt, ##__VA_ARGS__);
 #define BLE_LOG_E(TAG, fmt, ...) logger(LOG_ERROR, TAG, fmt, ##__VA_ARGS__);
 
-HAL_StatusTypeDef ble_init();
+    HAL_StatusTypeDef ble_init(USART_TypeDef *instance);
 
-void logger(stm32_log_level_t level, const char *TAG, const char *fmt, ...);
+    void logger(stm32_log_level_t level, const char *TAG, const char *fmt, ...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
