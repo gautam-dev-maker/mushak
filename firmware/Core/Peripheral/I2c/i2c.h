@@ -31,8 +31,8 @@ extern "C"
 
     typedef struct i2c_dev_t_
     {
-        I2C_HandleTypeDef *i2c_handle;
-        uint16_t dev_addr;
+        I2C_HandleTypeDef i2c_handle;
+        uint8_t dev_addr;
 
     } i2c_dev_t;
 

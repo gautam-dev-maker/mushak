@@ -27,16 +27,12 @@
 #include "as5600.h"
 
 ADC_HandleTypeDef hadc1;
-
-I2C_HandleTypeDef hi2c1;
-I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
-// static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 void StartDefaultTask(void *argument);
 
@@ -46,9 +42,9 @@ void vl6180x_task(void *param)
   vl6180x_init(I2C1, &vl6180x_dev);
   vl6180x_configure(&vl6180x_dev);
   uint8_t range;
-  while (vl6180x_measure_distance(&vl6180x_dev, &range) == HAL_OK)
+  while (1)
   {
-    BLE_LOG_E("VL6180x", "Range : %d", range);
+    vl6180x_measure_distance(&vl6180x_dev, &range);
     vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
@@ -79,13 +75,19 @@ int main(void)
 
   /* BLE log testing */
   ble_init(USART1);
-  BLE_LOG_E("MAIN", "Muskah is initialising");
+  BLE_LOG_E("MAIN", "Mushak is initialising\n");
 
   /* VL6180x Range Testing */
   xTaskCreate(&vl6180x_task, "VL6180x Task", 1024, NULL, 2, NULL);
 
   /* AS5600 Encoder Testing */
   xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
+
+  vTaskStartScheduler();
+
+  for (;;)
+  {
+  }
 }
 
 /**

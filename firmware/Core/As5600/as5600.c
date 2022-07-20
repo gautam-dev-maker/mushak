@@ -21,15 +21,15 @@
 
 HAL_StatusTypeDef as5600_init(I2C_TypeDef *instance, i2c_dev_t *dev)
 {
-    dev->i2c_handle->Instance = instance;
-    dev->i2c_handle->Init.ClockSpeed = 100000;
-    dev->i2c_handle->Init.DutyCycle = I2C_DUTYCYCLE_2;
-    dev->i2c_handle->Init.OwnAddress1 = 0;
-    dev->i2c_handle->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-    dev->i2c_handle->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-    dev->i2c_handle->Init.OwnAddress2 = 0;
-    dev->i2c_handle->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-    dev->i2c_handle->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+    dev->i2c_handle.Instance = instance;
+    dev->i2c_handle.Init.ClockSpeed = 100000;
+    dev->i2c_handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
+    dev->i2c_handle.Init.OwnAddress1 = 0;
+    dev->i2c_handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+    dev->i2c_handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+    dev->i2c_handle.Init.OwnAddress2 = 0;
+    dev->i2c_handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+    dev->i2c_handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
     dev->dev_addr = AS5600_CHIP_ID << 1; /* Since the address is 7 bits as per datasheet */
 
