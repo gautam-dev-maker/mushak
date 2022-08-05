@@ -1,3 +1,4 @@
+
 /**
  ******************************************************************************
  * @file           : vl6180x.h
@@ -26,6 +27,9 @@ extern "C"
 {
 #endif
 
+// #define VL6180X_WRITE_ADDR 0x52
+// #define VL6180X_READ_ADDR 0x53
+// // #define I2C_TIMEOUT 50
 /* The fixed I2C address of the device */
 #define VL6180X_DEFAULT_I2C_ADDR 0x29
 /* Device model identification number */
@@ -80,11 +84,20 @@ extern "C"
 #define VL6180X_ERROR_RANGEUFLOW 14 /* Raw range algo underflow */
 #define VL6180X_ERROR_RANGEOFLOW 15 /* Raw range algo overflow */
 
+#define VL6180X_REGISTERS_HVL6180X_REGISTERS_H
+
+#define VL6180X_SYSTEM_INTERRUPT_CLEAR 0x15
+
+#define VL6180X_SYSRANGE_START 0x18
+
+#define VL6180X_RESULT_RANGE_STATUS 0x4d
+#define VL6180X_RESULT_INTERRUPT_STATUS_GPIO 0x4f
+#define VL6180X_RESULT_RANGE_VAL 0x62
+
     HAL_StatusTypeDef vl6180x_init(I2C_TypeDef *instance, i2c_dev_t *dev);
     HAL_StatusTypeDef vl6180x_configure(i2c_dev_t *dev);
+    HAL_StatusTypeDef vl6180x_measure_distance(i2c_dev_t *dev, uint8_t *out_mm);
 
-    /* Range is in mm */
-    HAL_StatusTypeDef vl6180x_measure_distance(i2c_dev_t *dev, uint8_t *range);
 #ifdef __cplusplus
 }
 #endif

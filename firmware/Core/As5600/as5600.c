@@ -130,23 +130,23 @@ HAL_StatusTypeDef detect_magnet(i2c_dev_t *dev)
 
     if (i2c_read_8_bit(dev, STAT, &mag_status) != HAL_OK)
     {
-        BLE_LOG_I(AS5600, "Unable to Read Status Register");
+        BLE_LOG_I(AS5600, "Unable to Read Status Register\n");
         return HAL_ERROR;
     }
 
     if (mag_status & 0x20)
     {
-        BLE_LOG_I(AS5600, "Magnet was detected");
+        BLE_LOG_I(AS5600, "Magnet was detected\n");
         return HAL_OK;
     }
     else if (mag_status & 0x10)
     {
-        BLE_LOG_I(AS5600, "AGC maximum gain overflow, magnet too weak");
+        BLE_LOG_I(AS5600, "AGC maximum gain overflow, magnet too weak\n");
         return HAL_ERROR;
     }
     else if (mag_status & 0x08)
     {
-        BLE_LOG_I(AS5600, "AGC minimum gain overflow, magnet too strong");
+        BLE_LOG_I(AS5600, "AGC minimum gain overflow, magnet too strong\n");
         return HAL_ERROR;
     }
     return HAL_ERROR;

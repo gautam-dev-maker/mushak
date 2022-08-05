@@ -22,7 +22,7 @@
 #include "stdlib.h"
 #include "stm32f4xx_hal.h"
 
-#define I2C_TIMEOUT 10
+#define I2C_TIMEOUT 50
 
 #ifdef __cplusplus
 extern "C"

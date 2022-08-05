@@ -45,6 +45,7 @@ void vl6180x_task(void *param)
   while (1)
   {
     vl6180x_measure_distance(&vl6180x_dev, &range);
+    BLE_LOG_I("VL6180x", "The Range is = %d", range);
     vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
