@@ -38,16 +38,10 @@ extern "C"
 
     HAL_StatusTypeDef i2c_init(i2c_dev_t *dev);
 
-    HAL_StatusTypeDef
-    i2c_read_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t *out);
-
-    HAL_StatusTypeDef
-    i2c_read_16_bit(i2c_dev_t *dev, uint16_t reg_addr, uint16_t *out);
-
+    HAL_StatusTypeDef i2c_read_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t *out);
+    HAL_StatusTypeDef i2c_read_16_bit(i2c_dev_t *dev, uint16_t reg_addr, uint16_t *out);
     HAL_StatusTypeDef i2c_write_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t in);
-
     HAL_StatusTypeDef i2c_write_16_bit(i2c_dev_t *dev, uint16_t reg_addr, uint16_t in);
-
 #ifdef __cplusplus
 }
 #endif

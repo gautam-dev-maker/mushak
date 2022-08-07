@@ -25,8 +25,7 @@ HAL_StatusTypeDef i2c_init(i2c_dev_t *dev)
     return ret1 & ret2;
 }
 
-HAL_StatusTypeDef
-i2c_read_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t *out)
+HAL_StatusTypeDef i2c_read_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t *out)
 {
     uint8_t data[2] = {reg_addr >> 8, reg_addr};
     HAL_StatusTypeDef ret1 = HAL_I2C_Master_Transmit(&dev->i2c_handle, dev->dev_addr, data, 2, I2C_TIMEOUT);
@@ -34,8 +33,7 @@ i2c_read_8_bit(i2c_dev_t *dev, uint16_t reg_addr, uint8_t *out)
     return ret1 & ret2;
 }
 
-HAL_StatusTypeDef
-i2c_read_16_bit(i2c_dev_t *dev, uint16_t reg_addr, uint16_t *out)
+HAL_StatusTypeDef i2c_read_16_bit(i2c_dev_t *dev, uint16_t reg_addr, uint16_t *out)
 {
     uint8_t data[2] = {reg_addr >> 8, reg_addr};
     uint8_t out_data[2] = {0, 0};

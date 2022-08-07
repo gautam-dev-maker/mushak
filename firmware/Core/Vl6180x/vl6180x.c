@@ -1,36 +1,22 @@
-/**
- ******************************************************************************
- * @file           : vl6180x.c
- * @brief          : source code for VL6180x Library
- * @author         : Gautam Agrawal
- *
- * Created on: July 19, 2022
- ******************************************************************************
- * @attention
- *
- * Copyright (c)  2022 Society of Robotics and Automation
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- **/
-
 #include "vl6180x.h"
 
-HAL_StatusTypeDef vl6180x_init(I2C_TypeDef *instance, i2c_dev_t *dev) // I2C1
+static I2C_HandleTypeDef hi2c1;
+// static i2c_dev_t dev;
+
+HAL_StatusTypeDef vl6180x_init(I2C_TypeDef *instance, i2c_dev_t *dev)
 {
-	dev->i2c_handle.Instance = instance;
-	dev->i2c_handle.Init.ClockSpeed = 100000;
-	dev->i2c_handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
-	dev->i2c_handle.Init.OwnAddress1 = 0;
-	dev->i2c_handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-	dev->i2c_handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	dev->i2c_handle.Init.OwnAddress2 = 0;
-	dev->i2c_handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-	dev->i2c_handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-
-	dev->dev_addr = VL6180X_DEFAULT_I2C_ADDR << 1; /* Since the address is 7 bits as per datasheet */
-
+	// I2C_HandleTypeDef hi2c1;
+	hi2c1.Instance = instance;
+	hi2c1.Init.ClockSpeed = 100000;
+	hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+	hi2c1.Init.OwnAddress1 = 0;
+	hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+	hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+	hi2c1.Init.OwnAddress2 = 0;
+	hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+	hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+	dev->i2c_handle = hi2c1;
+	dev->dev_addr = 0x52;
 	return i2c_init(dev);
 }
 
@@ -40,7 +26,6 @@ HAL_StatusTypeDef vl6180x_configure(i2c_dev_t *dev)
 	i2c_read_8_bit(dev, 0x16, &val);
 	while (val != 0x01)
 	{
-		return HAL_ERROR;
 	}
 
 	/* Mandatory: Private registers. */
@@ -119,13 +104,11 @@ HAL_StatusTypeDef vl6180x_measure_distance(i2c_dev_t *dev, uint8_t *out_mm)
 	/* Clear interrupt flags. */
 	i2c_write_8_bit(dev, VL6180X_SYSTEM_INTERRUPT_CLEAR, 0x07);
 
-	HAL_StatusTypeDef ret;
-
 	/* Wait for device ready. */
 	do
 	{
 		i2c_read_8_bit(dev, VL6180X_RESULT_RANGE_STATUS, &status);
 	} while ((status & (1 << 0)) == 0);
 
-	return ret;
+	return HAL_OK;
 }

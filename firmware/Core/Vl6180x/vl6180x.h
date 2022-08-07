@@ -1,35 +1,19 @@
-
-/**
- ******************************************************************************
- * @file           : vl6180x.h
- * @brief          : header file for VL6180x Library
- * @author         : Gautam Agrawal
- *
- * Created on: July 19, 2022
- ******************************************************************************
- * @attention
- *
- * Copyright (c)  2022 Society of Robotics and Automation
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- **/
-
 #ifndef _VL6180x_H
 #define _VL6180x_H
 
-#include "i2c.h"
 #include "stm32f4xx_hal.h"
+#include "i2c.h"
+
+// extern I2C_HandleTypeDef hi2c1;
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-// #define VL6180X_WRITE_ADDR 0x52
-// #define VL6180X_READ_ADDR 0x53
-// // #define I2C_TIMEOUT 50
+#define VL6180X_WRITE_ADDR 0x52
+#define VL6180X_READ_ADDR 0x53
+#define I2C_TIMEOUT 50
 /* The fixed I2C address of the device */
 #define VL6180X_DEFAULT_I2C_ADDR 0x29
 /* Device model identification number */
@@ -95,7 +79,9 @@ extern "C"
 #define VL6180X_RESULT_RANGE_VAL 0x62
 
     HAL_StatusTypeDef vl6180x_init(I2C_TypeDef *instance, i2c_dev_t *dev);
+
     HAL_StatusTypeDef vl6180x_configure(i2c_dev_t *dev);
+
     HAL_StatusTypeDef vl6180x_measure_distance(i2c_dev_t *dev, uint8_t *out_mm);
 
 #ifdef __cplusplus

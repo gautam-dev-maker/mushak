@@ -15,79 +15,40 @@
  *
  ******************************************************************************
  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
+
 #include "main.h"
-#include "assert.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os.h"
-#include "ble_logger.h"
+#include <string.h>
+#include <stdio.h>
 #include "vl6180x.h"
-#include "as5600.h"
+#include "ble_logger.h"
 
-ADC_HandleTypeDef hadc1;
-I2C_HandleTypeDef hi2c3;
+// UART_HandleTypeDef huart1;
 
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_ADC1_Init(void);
-static void MX_I2C3_Init(void);
-void StartDefaultTask(void *argument);
+// static void MX_I2C1_Init(void);
+// static void MX_USART1_UART_Init(void);
 
-void vl6180x_task(void *param)
+/**
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void)
 {
+  uint8_t val = 100;
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  ble_init(USART1);
   i2c_dev_t vl6180x_dev;
   vl6180x_init(I2C1, &vl6180x_dev);
   vl6180x_configure(&vl6180x_dev);
-  uint8_t range;
-  while (1)
-  {
-    vl6180x_measure_distance(&vl6180x_dev, &range);
-    BLE_LOG_I("VL6180x", "The Range is = %d", range);
-    vTaskDelay(100 / portTICK_PERIOD_MS);
-  }
-}
-
-void as5600_task(void *param)
-{
-  i2c_dev_t as5600_dev;
-  as5600_init(I2C2, &as5600_dev);
 
   while (1)
   {
-    if (detect_magnet(&as5600_dev) == HAL_OK)
-    {
-      uint16_t magnitude;
-      BLE_LOG_I("AS5600", "Current Magnitude = %d", get_magnitude(&as5600_dev, &magnitude));
-    }
-  }
-}
-
-int main(void)
-{
-  HAL_Init();
-  SystemClock_Config();
-
-  MX_GPIO_Init();
-  MX_ADC1_Init();
-  MX_I2C3_Init();
-
-  /* BLE log testing */
-  ble_init(USART1);
-  BLE_LOG_E("MAIN", "Mushak is initialising\n");
-
-  /* VL6180x Range Testing */
-  xTaskCreate(&vl6180x_task, "VL6180x Task", 1024, NULL, 2, NULL);
-
-  /* AS5600 Encoder Testing */
-  xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
-
-  vTaskStartScheduler();
-
-  for (;;)
-  {
+    vl6180x_measure_distance(&vl6180x_dev, &val);
+    BLE_LOG_I("VL6180x", "%d\n", val);
+    HAL_Delay(100);
   }
 }
 
@@ -132,90 +93,6 @@ void SystemClock_Config(void)
 }
 
 /**
- * @brief ADC1 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_ADC1_Init(void)
-{
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-   */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.ScanConvMode = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-   */
-  sConfig.Channel = ADC_CHANNEL_0;
-  sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  /* USER CODE END ADC1_Init 2 */
-}
-
-/**
- * @brief I2C3 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_I2C3_Init(void)
-{
-
-  /* USER CODE BEGIN I2C3_Init 0 */
-
-  /* USER CODE END I2C3_Init 0 */
-
-  /* USER CODE BEGIN I2C3_Init 1 */
-
-  /* USER CODE END I2C3_Init 1 */
-  hi2c3.Instance = I2C3;
-  hi2c3.Init.ClockSpeed = 100000;
-  hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c3.Init.OwnAddress1 = 0;
-  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c3.Init.OwnAddress2 = 0;
-  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2C3_Init 2 */
-
-  /* USER CODE END I2C3_Init 2 */
-}
-
-/**
  * @brief GPIO Initialization Function
  * @param None
  * @retval None
@@ -224,30 +101,9 @@ static void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-}
-
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_StartDefaultTask */
-/**
- * @brief  Function implementing the defaultTask thread.
- * @param  argument: Not used
- * @retval None
- */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for (;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END 5 */
 }
 
 /**
@@ -260,6 +116,7 @@ void Error_Handler(void)
   while (1)
   {
   }
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef USE_FULL_ASSERT
