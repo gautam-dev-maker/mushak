@@ -19,27 +19,34 @@
 #include "main.h"
 #include <string.h>
 #include <stdio.h>
+
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "vl6180x.h"
 #include "ble_logger.h"
-
-// UART_HandleTypeDef huart1;
+#include "mpu6500.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-// static void MX_I2C1_Init(void);
-// static void MX_USART1_UART_Init(void);
 
-/**
- * @brief  The application entry point.
- * @retval int
- */
-int main(void)
+void mpu6500_task(void *arg)
 {
-  uint8_t val = 100;
-  HAL_Init();
-  SystemClock_Config();
-  MX_GPIO_Init();
-  ble_init(USART1);
+  MPU6500_Init();
+
+  int16_t AccData[3], GyroData[3];
+  while (1)
+  {
+    MPU6500_GetData(AccData, GyroData);
+
+    BLE_LOG_I("MPU6500", "%d\n", GyroData[0]);
+    HAL_Delay(1000);
+  }
+}
+
+void vl6180x_task(void *arg)
+{
+  uint8_t val;
   i2c_dev_t vl6180x_dev;
   vl6180x_init(I2C1, &vl6180x_dev);
   vl6180x_configure(&vl6180x_dev);
@@ -50,6 +57,25 @@ int main(void)
     BLE_LOG_I("VL6180x", "%d\n", val);
     HAL_Delay(100);
   }
+}
+
+/**
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+
+  ble_init(USART1);
+
+  xTaskCreate(vl6180x_task, "T1", 1024, NULL, 1, NULL);
+
+  xTaskCreate(mpu6500_task, "T2", 1024, NULL, 1, NULL);
+
+  vTaskStartScheduler();
 }
 
 /**
