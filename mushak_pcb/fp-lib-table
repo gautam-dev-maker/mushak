@@ -8,4 +8,6 @@
   (lib (name "VL6180XV0NR_1")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/VL6180XV0NR_1")(options "")(descr ""))
   (lib (name "SOT230P700X180-4N")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SOT230P700X180-4N")(options "")(descr ""))
   (lib (name "SMT-0440-T-R")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SMT-0440-T-R")(options "")(descr ""))
+  (lib (name "mushak_mount_footprint")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/mushak_mount_footprint")(options "")(descr ""))
+  (lib (name "ABS07-32")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/ABS07-32.768KHZ-T")(options "")(descr ""))
 )
