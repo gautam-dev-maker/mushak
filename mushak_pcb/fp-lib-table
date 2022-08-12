@@ -1,0 +1,13 @@
+(fp_lib_table
+  (lib (name "AS5600-ASOT")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/AS5600-ASOT")(options "")(descr ""))
+  (lib (name "DRV8833PW")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/DRV8833PW")(options "")(descr ""))
+  (lib (name "MPU-6500")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/MPU-6500")(options "")(descr ""))
+  (lib (name "SFH_3015_FA")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SFH_3015_FA")(options "")(descr ""))
+  (lib (name "SFH_4045N")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SFH_4045N")(options "")(descr ""))
+  (lib (name "STM32F407VGT6")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/STM32F407VGT6")(options "")(descr ""))
+  (lib (name "VL6180XV0NR_1")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/VL6180XV0NR_1")(options "")(descr ""))
+  (lib (name "SOT230P700X180-4N")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SOT230P700X180-4N")(options "")(descr ""))
+  (lib (name "SMT-0440-T-R")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SMT-0440-T-R")(options "")(descr ""))
+  (lib (name "mushak_mount_footprint")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/mushak_mount_footprint")(options "")(descr ""))
+  (lib (name "ABS07-32")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/ABS07-32.768KHZ-T")(options "")(descr ""))
+)
