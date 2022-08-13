@@ -1,146 +1,80 @@
-/**
- ******************************************************************************
- * @file           : as5600.h
- * @brief          : header file for AS5600 Encoder Library
- * @author         : Gautam Agrawal
- *
- * Created on: July 19, 2022
- ******************************************************************************
- * @attention
- *
- * Copyright (c)  2022 Society of Robotics and Automation
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- **/
+/*
 
-#ifndef _AS5600_H
-#define _AS5600_H
 
-#include "i2c.h"
-#include "ble_logger.h"
-#include "stm32f4xx_hal.h"
+	AS5600.H - описание регистров функций для работы с датчиком AS5600
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
 
-#define AS5600_CHIP_ID 0x36
+*/
+#ifndef AS5600_H
+#define AS5600_H
 
-#define ZMCO 0x00
-#define ZPOS_HI 0x01
-#define ZPOS_LO 0x02
-#define MPOS_HI 0x03
-#define MPOS_LO 0x04
-#define MANG_HI 0x05
-#define MANG_LO 0x06
-#define CONF_HI 0x07
-#define CONF_LO 0x08
-#define RAW_ANGLE_HI 0x0c
-#define RAW_ANGLE_LO 0x0d
-#define ANG_HI 0x0e
-#define ANG_LO 0x0f
-#define STAT 0x0b
-#define AGC 0x1a
-#define MAG_HI 0x1b
-#define MAG_LO 0x1c
-#define BURN 0xff
+#define AS5600_ADDR	0x36		// Адрес на шине
 
-    // Configuration Register
-    typedef enum
-    {
-        NOM = 0,
-        LPM1 = 1,
-        LPM2 = 2,
-        LPM3 = 3
-    } Power_Mode;
+//	Описание адресов регистров AS5600
 
-    typedef enum
-    {
-        OFF = 0,
-        LSB_1 = 1,
-        LSB_2 = 2,
-        LSB_3 = 3
-    } Hysteresis;
+#define ZMCO		0x00
+#define ZPOS_H		0x01		// Стартовая позиция
+#define ZPOS_L		0x02
+#define MPOS_H		0x03		// Стоповая позиция
+#define MPOS_L		0x04
+#define MANG_H		0x05
+#define MANG_L		0x06
+#define CONF_L		0x07
+#define CONF_H		0x08
 
-    typedef enum
-    {
-        ANALOG_1 = 0, // full range from 0% to 100% between GND and VDD
-        ANALOG_2 = 1, // reduced range from 10% to 90% between GND and VDD,
-        DIGITAL_PWM = 2
-    } Output_Stage;
+#define	RAWANG_H	0x0C		// "Сырой" угол
+#define RAWANG_L	0x0D
+#define ANGLE_H		0x0E		// Угол поворота
+#define ANGLE_L		0x0F
 
-    typedef enum
-    {
-        FREQUENCY_115hz = 0,
-        FREQUENCY_230hz = 1,
-        FREQUENCY_460hz = 2,
-        FREQUENCY_920hz = 3
-    } PWM_Frequency;
+#define STATUS		0x0B
+#define AGC				0x1A
+#define MAGN_H		0x1B
+#define MAGN_L		0x1C
 
-    typedef enum
-    {
-        FILTER_16x = 0,
-        FILTER_8x = 1,
-        FILTER_4x = 2,
-        FILTER_2x = 3
-    } Slow_Filter;
+#define BURN		0xFF
 
-    typedef enum
-    {
-        SLOW_FILTER = 0,
-        LSB_6 = 1,
-        LSB_7 = 2,
-        LSB_9 = 3,
-        LSB_18 = 4,
-        LSB_21 = 5,
-        LSB_24 = 6,
-        LSB_10 = 7
-    } Fast_Filter_Threshold;
+//	Описание битовых масок регистров
 
-    typedef enum
-    {
-        // OFF
-        ON = 1
-    } Watchdog;
+#define	CONF_L_PM			0x03		// Режим питания:	00 = NOM, 01 = LPM1, 10 = LPM2, 11 = LPM3
+#define CONF_H_SF			0x03		// Медлительность фильтра помех: 00 = 16x (1); 01 = 8x; 10 = 4x; 11 = 2x
+#define CONF_H_FTH		0x1C		// Порог "быстрого" фильтра
+#define CONF_H_WD			0x20		// Watchdog
 
-    typedef struct
-    {
-        Power_Mode mode;
-        Hysteresis hyst;
-        Output_Stage out;
-        PWM_Frequency freq;
-        Slow_Filter filter;
-        Fast_Filter_Threshold threshold;
-        Watchdog wd;
-    } as5600_config_t;
+//	Описание служебных констант
 
-    HAL_StatusTypeDef as5600_init(I2C_TypeDef *instance, i2c_dev_t *dev);
-    HAL_StatusTypeDef config_ams5600(i2c_dev_t *dev, as5600_config_t config);
-    HAL_StatusTypeDef set_max_angle(i2c_dev_t *dev, uint16_t new_max_angle);
-    HAL_StatusTypeDef get_max_angle(i2c_dev_t *dev, uint16_t *max_angle);
+#define	MAGNET_LOW	0x10
+#define MAGNET_HIGH	0x20
+#define MAGNET_NORM 0x30
 
-    HAL_StatusTypeDef set_start_position(i2c_dev_t *dev, uint16_t start_position);
-    HAL_StatusTypeDef get_start_position(i2c_dev_t *dev, uint16_t *start_position);
+#define HYST_MASK		0x0C
+#define HYST_OFF		0x00
+#define HYST_1LSB		0x04
+#define HYST_2LSB		0x08
+#define HYST_3LSB		0x0C
 
-    HAL_StatusTypeDef set_end_position(i2c_dev_t *dev, uint16_t end_angle);
-    HAL_StatusTypeDef get_end_position(i2c_dev_t *dev, uint16_t *end_position);
+#define	OUT_STG_MASK				0x30
+#define	OUT_STG_ANALOG			0x00
+#define OUT_STG_ANALOG_RED	0x10
+#define	OUT_STG_PWM					0x20
 
-    HAL_StatusTypeDef get_raw_angle(i2c_dev_t *dev, uint16_t *raw_angle);
-    HAL_StatusTypeDef get_scaled_angle(i2c_dev_t *dev, uint16_t *scaled_angle);
+#define PWMF_MASK						0xC0
+#define PWMF_115HZ					0x00
+#define	PWMF_230HZ					0x40
+#define	PWMF_460HZ					0x80
+#define PWMF_920HZ					0xC0
 
-    HAL_StatusTypeDef detect_magnet(i2c_dev_t *dev);
+void AS5600_WriteReg(uint8_t Reg, uint8_t Data);
+uint8_t AS5600_ReadReg(uint8_t Reg);
 
-    HAL_StatusTypeDef get_agc(i2c_dev_t *dev, uint8_t *agc);
-    HAL_StatusTypeDef get_magnitude(i2c_dev_t *dev, uint16_t *magnitude);
-    HAL_StatusTypeDef get_conf(i2c_dev_t *dev, as5600_config_t *config);
-
-    HAL_StatusTypeDef get_burn_count(i2c_dev_t *dev, uint8_t *count);
-
-#ifdef __cplusplus
-}
-#endif
+uint16_t AS5600_GetAngle(void);
+uint16_t AS5600_GetRawAngle(void);
+uint8_t AS5600_GetStatus(void);
+void AS5600_SetHystheresis(uint8_t Hyst);
+void AS5600_SetOutputStage(uint8_t OutStage);
+void AS5600_SetPWMFreq(uint8_t Freq);
 
 #endif
+
+
+

@@ -26,6 +26,7 @@
 #include "vl6180x.h"
 #include "ble_logger.h"
 #include "mpu6500.h"
+#include "as5600.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -59,6 +60,38 @@ void vl6180x_task(void *arg)
   }
 }
 
+I2C_HandleTypeDef hi2c1;
+
+void as5600_task(void *param)
+{
+  // i2c_dev_t as5600_dev;
+
+  
+
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+
+  if (HAL_I2C_Init(&hi2c1) == HAL_OK)
+  {
+    BLE_LOG_I("AS5600", "Init successful\n");
+  }
+
+  while (1)
+  {
+    uint16_t angle =  AS5600_GetAngle();
+
+    BLE_LOG_I("AS5600","Angle is : %d\n",angle);
+    HAL_Delay(100);
+  }
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -74,6 +107,8 @@ int main(void)
   xTaskCreate(vl6180x_task, "T1", 1024, NULL, 1, NULL);
 
   xTaskCreate(mpu6500_task, "T2", 1024, NULL, 1, NULL);
+
+  xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
 
   vTaskStartScheduler();
 }

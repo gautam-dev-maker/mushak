@@ -1,189 +1,82 @@
-/**
- ******************************************************************************
- * @file           : as5600.c
- * @brief          : source code for AS5600 Encoder Library
- * @author         : Gautam Agrawal
- *
- * Created on: July 19, 2022
- ******************************************************************************
- * @attention
- *
- * Copyright (c)  2022 Society of Robotics and Automation
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- **/
+/*
 
+
+    AS5600.C - �������� ������� ��� ������ � �������� AS5600
+
+
+*/
+
+#include "stm32f4xx_hal.h"
 #include "as5600.h"
+#include "ble_logger.h"
 
-#define AS5600 "AS5600"
+extern I2C_HandleTypeDef hi2c1;
 
-HAL_StatusTypeDef as5600_init(I2C_TypeDef *instance, i2c_dev_t *dev)
+void AS5600_WriteReg(uint8_t Reg, uint8_t Data)
 {
-    dev->i2c_handle.Instance = instance;
-    dev->i2c_handle.Init.ClockSpeed = 100000;
-    dev->i2c_handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
-    dev->i2c_handle.Init.OwnAddress1 = 0;
-    dev->i2c_handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-    dev->i2c_handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-    dev->i2c_handle.Init.OwnAddress2 = 0;
-    dev->i2c_handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-    dev->i2c_handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-
-    dev->dev_addr = AS5600_CHIP_ID << 1; /* Since the address is 7 bits as per datasheet */
-
-    return i2c_init(dev);
+    HAL_I2C_Master_Transmit(&hi2c1, AS5600_ADDR, &Data, 1, 10);
+    HAL_I2C_Mem_Write(&hi2c1, (AS5600_ADDR << 1), Reg, 1, &Data, 1, 100);
 }
 
-HAL_StatusTypeDef config_ams5600(i2c_dev_t *dev, as5600_config_t config)
+uint8_t AS5600_ReadReg(uint8_t Reg)
 {
-    uint8_t config_lo = config.freq << 6 | config.out << 4 | config.hyst << 2 | config.mode;
-    uint8_t config_hi = config.wd << 5 | config.threshold << 2 | config.filter;
+    uint8_t DataRead = 0;
+    HAL_I2C_Mem_Read(&hi2c1, (AS5600_ADDR << 1), Reg, 1, &DataRead, 1, 100);
 
-    HAL_StatusTypeDef ret = i2c_write_8_bit(dev, CONF_LO, config_lo);
-    HAL_StatusTypeDef ret2 = i2c_write_8_bit(dev, CONF_HI, config_hi);
-    return ret && ret2;
+    return DataRead;
 }
 
-HAL_StatusTypeDef set_max_angle(i2c_dev_t *dev, uint16_t new_max_angle)
+uint16_t AS5600_GetAngle()
 {
-    uint8_t low_byte = new_max_angle & 0xff;
-    uint8_t high_byte = (new_max_angle >> 8) & 0xff;
-
-    HAL_StatusTypeDef ret1 = i2c_write_8_bit(dev, MANG_LO, low_byte);
-    HAL_StatusTypeDef ret2 = i2c_write_8_bit(dev, MANG_HI, high_byte);
-
-    return ret1 && ret2;
+    return (int)((float)(AS5600_ReadReg(ANGLE_L) + (AS5600_ReadReg(ANGLE_H) << 8)) / 4096 * 360);
 }
 
-HAL_StatusTypeDef get_max_angle(i2c_dev_t *dev, uint16_t *max_angle)
+uint16_t AS5600_GetRawAngle()
 {
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, MANG_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, MANG_LO, &low);
-    *max_angle = ((high << 8) | low);
-    return ret1 && ret2;
+    uint16_t AngleVal = AS5600_ReadReg(RAWANG_L) + (AS5600_ReadReg(RAWANG_H) << 8);
+    return AngleVal;
 }
 
-HAL_StatusTypeDef set_start_position(i2c_dev_t *dev, uint16_t start_position)
+uint8_t AS5600_GetStatus()
 {
-    uint8_t low_byte = start_position & 0xff;
-    uint8_t high_byte = (start_position >> 8) & 0xff;
-
-    HAL_StatusTypeDef ret1 = i2c_write_8_bit(dev, ZPOS_LO, low_byte);
-    HAL_StatusTypeDef ret2 = i2c_write_8_bit(dev, ZPOS_HI, high_byte);
-
-    return ret1 && ret2;
+    return AS5600_ReadReg(STATUS) & 0x38;
 }
 
-HAL_StatusTypeDef get_start_position(i2c_dev_t *dev, uint16_t *start_position)
+// void detect_magnet()
+// {
+//     uint8_t mag_status;
+
+//     if (mag_status & 0x20)
+//     {
+//         BLE_LOG_I("AS5600", "Magnet was detected");
+//     }
+//     else if (mag_status & 0x10)
+//     {
+//         BLE_LOG_I("AS5600", "AGC maximum gain overflow, magnet too weak");
+//     }
+//     else if (mag_status & 0x08)
+//     {
+//         BLE_LOG_I("AS5600", "AGC minimum gain overflow, magnet too strong");
+//     }
+// }
+
+void AS5600_SetHystheresis(uint8_t Hyst)
 {
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, ZPOS_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, ZPOS_LO, &low);
-    *start_position = ((high << 8) | low);
-    return ret1 && ret2;
+    uint8_t TmpConfHigh = AS5600_ReadReg(CONF_H);
+    TmpConfHigh |= (HYST_MASK & Hyst);
+    AS5600_WriteReg(CONF_H, TmpConfHigh);
 }
 
-HAL_StatusTypeDef set_end_position(i2c_dev_t *dev, uint16_t end_angle)
+void AS5600_SetOutputStage(uint8_t OutStage)
 {
-    uint8_t low_byte = end_angle & 0xff;
-    uint8_t high_byte = (end_angle >> 8) & 0xff;
-
-    HAL_StatusTypeDef ret1 = i2c_write_8_bit(dev, MPOS_LO, low_byte);
-    HAL_StatusTypeDef ret2 = i2c_write_8_bit(dev, MPOS_HI, high_byte);
-
-    return ret1 && ret2;
+    uint8_t TmpConfHigh = AS5600_ReadReg(CONF_H);
+    TmpConfHigh |= (OUT_STG_MASK & OutStage);
+    AS5600_WriteReg(CONF_H, TmpConfHigh);
 }
 
-HAL_StatusTypeDef get_end_position(i2c_dev_t *dev, uint16_t *end_position)
+void AS5600_SetPWMFreq(uint8_t Freq)
 {
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, MPOS_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, MPOS_LO, &low);
-    *end_position = ((high << 8) | low);
-    return ret1 && ret2;
-}
-
-HAL_StatusTypeDef get_raw_angle(i2c_dev_t *dev, uint16_t *raw_angle)
-{
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, RAW_ANGLE_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, RAW_ANGLE_LO, &low);
-    *raw_angle = ((high << 8) | low);
-    return ret1 && ret2;
-}
-
-HAL_StatusTypeDef get_scaled_angle(i2c_dev_t *dev, uint16_t *scaled_angle)
-{
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, ANG_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, ANG_LO, &low);
-    *scaled_angle = ((high << 8) | low);
-    return ret1 && ret2;
-}
-
-HAL_StatusTypeDef detect_magnet(i2c_dev_t *dev)
-{
-    uint8_t mag_status;
-
-    if (i2c_read_8_bit(dev, STAT, &mag_status) != HAL_OK)
-    {
-        BLE_LOG_I(AS5600, "Unable to Read Status Register\n");
-        return HAL_ERROR;
-    }
-
-    if (mag_status & 0x20)
-    {
-        BLE_LOG_I(AS5600, "Magnet was detected\n");
-        return HAL_OK;
-    }
-    else if (mag_status & 0x10)
-    {
-        BLE_LOG_I(AS5600, "AGC maximum gain overflow, magnet too weak\n");
-        return HAL_ERROR;
-    }
-    else if (mag_status & 0x08)
-    {
-        BLE_LOG_I(AS5600, "AGC minimum gain overflow, magnet too strong\n");
-        return HAL_ERROR;
-    }
-    return HAL_ERROR;
-}
-
-HAL_StatusTypeDef get_agc(i2c_dev_t *dev, uint8_t *agc)
-{
-    return i2c_read_8_bit(dev, AGC, agc);
-}
-
-HAL_StatusTypeDef get_magnitude(i2c_dev_t *dev, uint16_t *magnitude)
-{
-    uint8_t high, low;
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, MAG_HI, &high);
-    HAL_StatusTypeDef ret2 = i2c_read_8_bit(dev, MAG_LO, &low);
-    *magnitude = ((high << 8) | low);
-    return ret1 && ret2;
-}
-
-HAL_StatusTypeDef get_conf(i2c_dev_t *dev, as5600_config_t *config)
-{
-    uint8_t high, low;
-    HAL_StatusTypeDef ret = i2c_read_8_bit(dev, CONF_HI, &high);
-    HAL_StatusTypeDef ret1 = i2c_read_8_bit(dev, CONF_LO, &low);
-
-    config->mode = (low & 0x03);
-    config->hyst = ((low & 0x0c) >> 2);
-    config->out = ((low & 0x30) >> 4);
-    config->freq = ((low & 0xc0) >> 6);
-    config->filter = ((high & 0x03));
-    config->threshold = ((high & 0x1c)) >> 2;
-    config->wd = ((high & 0x20)) >> 5;
-
-    return ret & ret1;
-}
-
-HAL_StatusTypeDef get_burn_count(i2c_dev_t *dev, uint8_t *count)
-{
-    return i2c_read_8_bit(dev, ZMCO, count);
+    uint8_t TmpConfHigh = AS5600_ReadReg(CONF_H);
+    TmpConfHigh |= (PWMF_MASK & Freq);
+    AS5600_WriteReg(CONF_H, TmpConfHigh);
 }
