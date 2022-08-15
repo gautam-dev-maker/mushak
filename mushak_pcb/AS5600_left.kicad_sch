@@ -591,7 +591,7 @@
     (in_bom yes) (on_board yes)
     (uuid 5c07921a-d9ee-4218-b14f-44f9225af66e)
     (property "Reference" "C23" (id 0) (at 129.286 108.204 90))
-    (property "Value" "100nF" (id 1) (at 121.412 108.712 90))
+    (property "Value" "0.1uF" (id 1) (at 121.412 108.712 90))
     (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 129.794 105.9688 0)
       (effects (font (size 1.27 1.27)) hide)
     )

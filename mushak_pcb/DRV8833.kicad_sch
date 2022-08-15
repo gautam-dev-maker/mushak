@@ -281,6 +281,7 @@
     )
   )
 
+
   (junction (at 132.08 95.25) (diameter 0) (color 0 0 0 0)
     (uuid 069ede83-0851-40ba-8f35-df74fe27206c)
   )
@@ -581,7 +582,7 @@
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid c931c2b4-bd85-40fb-ae74-00273e24b4ac)
     (property "Reference" "C26" (id 0) (at 126.492 82.55 90))
-    (property "Value" "10nF" (id 1) (at 126.492 85.09 90))
+    (property "Value" "0.01uF" (id 1) (at 126.492 85.09 90))
     (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 130.302 89.2048 0)
       (effects (font (size 1.27 1.27)) hide)
     )
