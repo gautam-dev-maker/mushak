@@ -27,9 +27,11 @@
 #include "ble_logger.h"
 #include "mpu6500.h"
 #include "as5600.h"
+#include "drv8833.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+// static void MX_TIM1_Init(void);
 
 void mpu6500_task(void *arg)
 {
@@ -66,8 +68,6 @@ void as5600_task(void *param)
 {
   // i2c_dev_t as5600_dev;
 
-  
-
   hi2c1.Instance = I2C1;
   hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
@@ -85,9 +85,22 @@ void as5600_task(void *param)
 
   while (1)
   {
-    uint16_t angle =  AS5600_GetAngle();
+    uint16_t angle = AS5600_GetAngle();
 
-    BLE_LOG_I("AS5600","Angle is : %d\n",angle);
+    BLE_LOG_I("AS5600", "Angle is : %d\n", angle);
+    HAL_Delay(100);
+  }
+}
+
+void drv8833_task(void *param)
+{
+  TIM_HandleTypeDef htim;
+  drv8833_init(&htim);
+
+  while (1)
+  {
+    set_motor_speed(MOTOR_A, MOTOR_FORWARD, 0.5);
+    set_motor_speed(MOTOR_B, MOTOR_BACKWARD, 0.5);
     HAL_Delay(100);
   }
 }
@@ -109,6 +122,8 @@ int main(void)
   xTaskCreate(mpu6500_task, "T2", 1024, NULL, 1, NULL);
 
   xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
+
+  xTaskCreate(&drv8833_task, "DRV8833 Task", 1024, NULL, 2, NULL);
 
   vTaskStartScheduler();
 }

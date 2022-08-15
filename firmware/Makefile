@@ -45,6 +45,7 @@ Core/Vl6180x/vl6180x.c \
 Core/Mpu6500/mpu6500.c \
 Core/As5600/as5600.c \
 Core/Ble_logger/ble_logger.c \
+Core/Drv8833/drv8833.c \
 Core/Peripheral/I2c/i2c.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
@@ -148,7 +149,8 @@ C_INCLUDES =  \
 -ICore/Peripheral/I2c/ \
 -ICore/Ble_logger/ \
 -ICore/Mpu6500/ \
--ICore/As5600/
+-ICore/As5600/ \
+-ICore/Drv8833/
 
 
 # compile gcc flags
