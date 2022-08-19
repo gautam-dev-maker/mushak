@@ -1479,9 +1479,9 @@
   (no_connect (at 68.58 128.524) (uuid 0d0a54d4-914d-4180-86e4-2188aa9f09f3))
   (no_connect (at 68.58 90.424) (uuid 4419597c-8c10-4a92-8ae3-a62d1c71871a))
   (no_connect (at 33.02 120.904) (uuid 641aea3e-8e9a-4acf-a005-3d713990d131))
-  (no_connect (at 33.02 123.444) (uuid 641aea3e-8e9a-4acf-a005-3d713990d131))
-  (no_connect (at 33.02 125.984) (uuid 641aea3e-8e9a-4acf-a005-3d713990d131))
-  (no_connect (at 33.02 128.524) (uuid 641aea3e-8e9a-4acf-a005-3d713990d131))
+  (no_connect (at 33.02 123.444) (uuid 641aea3e-8e9a-4acf-a005-3d713990d132))
+  (no_connect (at 33.02 125.984) (uuid 641aea3e-8e9a-4acf-a005-3d713990d133))
+  (no_connect (at 33.02 128.524) (uuid 641aea3e-8e9a-4acf-a005-3d713990d134))
   (no_connect (at 33.02 98.044) (uuid 79af5892-7280-452f-a9b6-eb652737ce43))
   (no_connect (at 33.02 100.584) (uuid 79af5892-7280-452f-a9b6-eb652737ce44))
   (no_connect (at 33.02 103.124) (uuid 79af5892-7280-452f-a9b6-eb652737ce45))
@@ -1489,6 +1489,7 @@
   (no_connect (at 33.02 95.504) (uuid 79af5892-7280-452f-a9b6-eb652737ce49))
   (no_connect (at 33.02 108.204) (uuid 79af5892-7280-452f-a9b6-eb652737ce4b))
   (no_connect (at 33.02 115.824) (uuid 79af5892-7280-452f-a9b6-eb652737ce4e))
+  (no_connect (at 33.02 105.664) (uuid cbf3ed61-3dd3-4fb4-bf5b-b07385281062))
   (no_connect (at 68.58 75.184) (uuid e39268f7-82ce-42f3-bf42-48c0e805d0f5))
 
   (wire (pts (xy 68.58 133.604) (xy 71.12 133.604))
@@ -1561,6 +1562,14 @@
   (wire (pts (xy 93.98 69.85) (xy 102.362 69.85))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 13199118-3cc9-4282-b610-d11bd12bda07)
+  )
+  (wire (pts (xy 91.186 64.77) (xy 91.186 100.584))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 14787c2c-cdd0-44ba-8b3a-adb7b174ad2c)
+  )
+  (wire (pts (xy 102.362 64.77) (xy 91.186 64.77))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 14a9f9f3-45c6-48c5-a4ac-3d73b4ebb188)
   )
   (wire (pts (xy 68.58 98.044) (xy 96.52 98.044))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -1847,6 +1856,10 @@
   (wire (pts (xy 45.72 45.974) (xy 45.72 47.244))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 4fd03598-234f-4469-ab99-0502bcbd33c1)
+  )
+  (wire (pts (xy 91.186 100.584) (xy 68.58 100.584))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 51c2af7f-f150-45a0-a2b0-f4e7e4a07cda)
   )
   (wire (pts (xy 44.196 150.114) (xy 43.942 150.114))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -2308,10 +2321,6 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid ddc8252d-44fa-48aa-a164-77f7c9a61c94)
   )
-  (wire (pts (xy 29.21 105.664) (xy 33.02 105.664))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid ded49d49-bc8a-417b-b53e-2d074a894849)
-  )
   (wire (pts (xy 68.58 65.024) (xy 71.12 65.024))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid df159538-e0c4-4f10-82ac-494f37fd6c61)
@@ -2451,15 +2460,6 @@
   (text "Oscillator circuit\n" (at 267.97 130.81 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid f8751234-6b14-4cfe-808b-8439cc200093)
-  )
-
-  (label "BLE_TX" (at 198.628 146.05 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 1fc58e44-2b16-4939-aebc-daf21c59dc0c)
-  )
-  (label "BLE_RX" (at 198.628 148.59 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 75917824-5e9f-4d06-b766-f26e1fcdd859)
   )
 
   (global_label "DEBUG" (shape input) (at 71.12 82.804 0) (fields_autoplaced)
@@ -2898,7 +2898,7 @@
     (uuid 1273f667-bd83-4eaf-a97c-819701fc1fd5)
     (property "Reference" "SW2" (id 0) (at 203.2 105.41 0))
     (property "Value" "SW_Push" (id 1) (at 203.2 107.95 0))
-    (property "Footprint" "Button_Switch_SMD:SW_SPST_CK_RS282G05A3" (id 2) (at 203.2 107.95 0)
+    (property "Footprint" "TL1015AF160QG:SW_TL1015AF160QG" (id 2) (at 203.2 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 203.2 107.95 0)
@@ -3993,7 +3993,7 @@
     (uuid b266ad3c-1d50-4b2b-8a1e-c69f93195963)
     (property "Reference" "SW1" (id 0) (at 210.82 88.9 0))
     (property "Value" "SW_Push" (id 1) (at 203.2 86.36 0))
-    (property "Footprint" "Button_Switch_SMD:SW_SPST_CK_RS282G05A3" (id 2) (at 203.2 86.36 0)
+    (property "Footprint" "TL1015AF160QG:SW_TL1015AF160QG" (id 2) (at 203.2 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 203.2 86.36 0)
@@ -4754,14 +4754,8 @@
     (path "/52577cb3-f0fb-427a-8f19-6df3d1f7745e"
       (reference "C21") (unit 1) (value "12.5pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
-    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/ccde8f39-c03d-439b-b8c0-bd3bb19d3faa"
-      (reference "C22") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
-    )
     (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/5c07921a-d9ee-4218-b14f-44f9225af66e"
       (reference "C23") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
-    )
-    (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/be851069-5f76-45e2-91a8-855ff1142f2c"
-      (reference "C24") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
     (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/9f4b59ca-5736-48e5-8a60-ad6ed7c6312a"
       (reference "C25") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0201_0603Metric")
@@ -4886,6 +4880,12 @@
     (path "/2c73dddc-4bab-40a4-8c83-c5c599e93cb7/314ed4aa-ac30-4907-aa71-65ffc91388b4"
       (reference "J17") (unit 1) (value "ToF") (footprint "mushak_mount_footprint:STAND_SLAVE_04")
     )
+    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/b0240ac4-976d-4884-8446-e4029611ccf2"
+      (reference "M1") (unit 1) (value "motor") (footprint "mushak_mount_footprint:motor")
+    )
+    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/c5cbe8da-a568-4878-be33-6b742ab8eee6"
+      (reference "M2") (unit 1) (value "motor") (footprint "mushak_mount_footprint:motor")
+    )
     (path "/f85a8f06-68b6-4dee-b46b-b569fac369a8"
       (reference "Q1") (unit 1) (value "DMN3065LW-7") (footprint "Package_TO_SOT_SMD:SOT-323_SC-70")
     )
@@ -4980,22 +4980,10 @@
       (reference "R26") (unit 1) (value "47k") (footprint "Resistor_SMD:R_0201_0603Metric")
     )
     (path "/b266ad3c-1d50-4b2b-8a1e-c69f93195963"
-      (reference "SW1") (unit 1) (value "SW_Push") (footprint "Button_Switch_SMD:SW_SPST_CK_RS282G05A3")
+      (reference "SW1") (unit 1) (value "SW_Push") (footprint "TL1015AF160QG:SW_TL1015AF160QG")
     )
     (path "/1273f667-bd83-4eaf-a97c-819701fc1fd5"
-      (reference "SW2") (unit 1) (value "SW_Push") (footprint "Button_Switch_SMD:SW_SPST_CK_RS282G05A3")
-    )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/b316c1b7-53ed-4315-abba-5e66fedb1d35"
-      (reference "TP23") (unit 1) (value "MOT_1") (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm")
-    )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/8ed12b6e-5fbe-4bb4-88a7-54a2a43bd1c0"
-      (reference "TP24") (unit 1) (value "MOT_1") (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm")
-    )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/d708ada7-201f-4599-b32d-30c531b46253"
-      (reference "TP25") (unit 1) (value "MOT_2") (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm")
-    )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/434155f3-2fc9-429a-8336-7001412173f0"
-      (reference "TP26") (unit 1) (value "MOT_2") (footprint "TestPoint:TestPoint_Pad_1.0x1.0mm")
+      (reference "SW2") (unit 1) (value "SW_Push") (footprint "TL1015AF160QG:SW_TL1015AF160QG")
     )
     (path "/af2b6e1b-fbd3-4882-ace2-a14e9a039991"
       (reference "U2") (unit 1) (value "TLV1117LV30DCYT") (footprint "SOT230P700X180-4N:SOT230P700X180-4N")

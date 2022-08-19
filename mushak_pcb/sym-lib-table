@@ -6,4 +6,5 @@
   (lib (name "SFH_4045N")(type "Legacy")(uri "${KIPRJMOD}/component_libraries/SFH_4045N/SFH_4045N.lib")(options "")(descr ""))
   (lib (name "STM32F407VGT6")(type "Legacy")(uri "${KIPRJMOD}/component_libraries/STM32F407VGT6/STM32F407VGT6.lib")(options "")(descr ""))
   (lib (name "VL6180XV0NR_1")(type "Legacy")(uri "${KIPRJMOD}/component_libraries/VL6180XV0NR_1/VL6180XV0NR_1.lib")(options "")(descr ""))
+  (lib (name "New_Library")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/mushak_mount_footprint/New_Library.kicad_sym")(options "")(descr ""))
 )
