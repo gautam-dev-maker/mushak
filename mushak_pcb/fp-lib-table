@@ -10,4 +10,5 @@
   (lib (name "SMT-0440-T-R")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/SMT-0440-T-R")(options "")(descr ""))
   (lib (name "mushak_mount_footprint")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/mushak_mount_footprint")(options "")(descr ""))
   (lib (name "ABS07-32")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/ABS07-32.768KHZ-T")(options "")(descr ""))
+  (lib (name "TL1015AF160QG")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/TL1015AF160QG")(options "")(descr ""))
 )
