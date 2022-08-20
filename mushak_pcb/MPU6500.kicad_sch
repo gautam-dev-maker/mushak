@@ -746,7 +746,7 @@
     (property "Value" "0.01uf" (id 1) (at 169.164 52.578 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 169.3672 54.102 0)
+    (property "Footprint" "Capacitor_SMD:C_0201_0603Metric" (id 2) (at 169.3672 54.102 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 168.402 50.292 0)

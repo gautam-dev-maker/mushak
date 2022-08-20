@@ -1354,7 +1354,6 @@
     )
   )
 
-
   (junction (at 266.7 16.51) (diameter 0) (color 0 0 0 0)
     (uuid 028d3caf-5f7a-4dad-bfc8-cf537e962269)
   )
@@ -3085,7 +3084,7 @@
     (property "Value" "0.01uF" (id 1) (at 264.16 95.2499 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 261.3152 97.79 0)
+    (property "Footprint" "Capacitor_SMD:C_0201_0603Metric" (id 2) (at 261.3152 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 260.35 93.98 0)
@@ -3394,7 +3393,7 @@
     (uuid 533065b9-0d82-495b-9749-a6ba34793884)
     (property "Reference" "J1" (id 0) (at 225.425 140.97 0))
     (property "Value" "Conn_01x04_Male" (id 1) (at 225.425 143.51 0))
-    (property "Footprint" "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" (id 2) (at 224.79 148.59 0)
+    (property "Footprint" "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical" (id 2) (at 224.79 148.59 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 224.79 148.59 0)
@@ -4710,7 +4709,7 @@
       (reference "C16") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0201_0603Metric")
     )
     (path "/298d7f54-382e-4035-82e6-d12685de15e8"
-      (reference "C17") (unit 1) (value "0.01uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C17") (unit 1) (value "0.01uF") (footprint "Capacitor_SMD:C_0201_0603Metric")
     )
     (path "/abd9de0a-decf-4e5d-8587-e1d96a7dcb2e"
       (reference "C18") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
@@ -4746,7 +4745,7 @@
       (reference "C30") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0201_0603Metric")
     )
     (path "/cb44acba-527a-4750-b41f-72d265c3f4c8/585e9309-f78f-4786-920e-5e445300fb5d"
-      (reference "C31") (unit 1) (value "0.01uf") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C31") (unit 1) (value "0.01uf") (footprint "Capacitor_SMD:C_0201_0603Metric")
     )
     (path "/cb44acba-527a-4750-b41f-72d265c3f4c8/b5b8bfc3-6876-47ed-8af9-97827171e9fe"
       (reference "C32") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0201_0603Metric")
@@ -4800,7 +4799,7 @@
       (reference "IC2") (unit 1) (value "AS5600-ASOT") (footprint "AS5600-ASOT:SOIC127P600X175-8N")
     )
     (path "/533065b9-0d82-495b-9749-a6ba34793884"
-      (reference "J1") (unit 1) (value "Conn_01x04_Male") (footprint "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
+      (reference "J1") (unit 1) (value "Conn_01x04_Male") (footprint "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical")
     )
     (path "/694b3d6e-79ba-4555-820c-469fe372e4c1"
       (reference "J2") (unit 1) (value "Conn_01x02_Female") (footprint "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical")
@@ -4948,9 +4947,6 @@
     )
     (path "/f1b30f82-12f7-4cee-a306-ddb179776838"
       (reference "R26") (unit 1) (value "47k") (footprint "Resistor_SMD:R_0201_0603Metric")
-    )
-    (path "/2c73dddc-4bab-40a4-8c83-c5c599e93cb7/7a42c4f7-316d-483d-a774-55d4e08aacd6"
-      (reference "R27") (unit 1) (value "4.7k") (footprint "")
     )
     (path "/b266ad3c-1d50-4b2b-8a1e-c69f93195963"
       (reference "SW1") (unit 1) (value "SW_Push") (footprint "TL1015AF160QG:SW_TL1015AF160QG")
