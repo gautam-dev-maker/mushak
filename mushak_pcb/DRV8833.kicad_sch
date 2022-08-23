@@ -269,7 +269,6 @@
     )
   )
 
-
   (junction (at 154.94 75.692) (diameter 0) (color 0 0 0 0)
     (uuid 1a1aa2c1-e2c1-4857-b59c-6ef280cddca0)
   )
@@ -551,7 +550,7 @@
     (pin "9" (uuid 2b984162-16f8-44f9-bd56-706c88fd7182))
   )
 
-  (symbol (lib_id "New_Library:motor") (at 212.598 120.904 0) (unit 1)
+  (symbol (lib_id "New_Library:motor") (at 212.598 120.904 180) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid c5cbe8da-a568-4878-be33-6b742ab8eee6)
     (property "Reference" "M2" (id 0) (at 212.598 107.95 0))
