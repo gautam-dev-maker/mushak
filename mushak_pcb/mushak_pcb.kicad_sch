@@ -3586,7 +3586,7 @@
     (uuid 694b3d6e-79ba-4555-820c-469fe372e4c1)
     (property "Reference" "J2" (id 0) (at 186.055 20.32 0))
     (property "Value" "Conn_01x02_Female" (id 1) (at 186.055 22.86 0))
-    (property "Footprint" "Connector_JST:JST_SHL_SM02B-SHLS-TF_1x02-1MP_P1.00mm_Horizontal" (id 2) (at 185.42 28.448 0)
+    (property "Footprint" "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical" (id 2) (at 185.42 28.448 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 185.42 28.448 0)
@@ -4914,7 +4914,7 @@
       (reference "J1") (unit 1) (value "Conn_01x04_Male") (footprint "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical")
     )
     (path "/694b3d6e-79ba-4555-820c-469fe372e4c1"
-      (reference "J2") (unit 1) (value "Conn_01x02_Female") (footprint "Connector_JST:JST_SHL_SM02B-SHLS-TF_1x02-1MP_P1.00mm_Horizontal")
+      (reference "J2") (unit 1) (value "Conn_01x02_Female") (footprint "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical")
     )
     (path "/be764d54-1c1d-4212-b9f1-489fc6581cc4"
       (reference "J3") (unit 1) (value "BLE_Conn") (footprint "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical")
