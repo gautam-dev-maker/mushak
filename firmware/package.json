@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "blendmicro": "^0.4.1",
+    "noble": "^1.9.1"
+  }
+}
