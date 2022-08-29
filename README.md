@@ -5,9 +5,14 @@
 # Table of Content
 - [Table of Content](#table-of-content)
 - [About The Project](#about-the-project)
+- [File Structure](#file-structure)
 - [Firmware](#firmware)
+  - [File Structure](#file-structure-1)
   - [Pinout of STM32F405RG](#pinout-of-stm32f405rg)
     - [Communication Buses](#communication-buses)
+    - [ADC](#adc)
+    - [PWM](#pwm)
+    - [GPIO](#gpio)
   - [How To Use The Firmware](#how-to-use-the-firmware)
     - [Install gcc-arm-none-eabi compiler tool suite](#install-gcc-arm-none-eabi-compiler-tool-suite)
     - [Install ST-Link Toolchain](#install-st-link-toolchain)
@@ -24,6 +29,17 @@ Mushak is a micromouse maze solving bot. The aim of this project is to make Indi
 
 This micromouse consist of a very small coreless motors (6 mm width and 10 mm length) and PCB as it's base . Since coreless motors doesn't provide enough torque for the movements of bot we used gear box to increase the torque. 
 
+# File Structure
+
+    .
+    ├── Assets             # Documentation files screenshots, gifs, videos of results
+    ├── firmware           # contains required code for controlling the bot
+    ├── mushak_pcb         # PCB files made in  kicad 6
+    ├── LICENSE            # License for this project
+    └── README.md          # Contains documentation and information about this project
+
+Further file structure of each folder is given in below sections
+
 # Firmware
 
 The firmware for this project is written using STM32-HAL. STM32 HAL consist of bare-metal register address and light weight peripheral libraries giving programmer the full control. For running multiple tasks we are using [FreeRTOS](https://www.freertos.org). We will be storing the maze in flash memory, since page size is 2 bytes, we need to access 2 bytes at a a time. 
@@ -39,6 +55,46 @@ The firmware is required to interact with the following external sensors/periphe
 - [VL6180x](https://www.st.com/resource/en/datasheet/vl6180x.pdf) : Time of flight sensor to measure the distance between wall and bot.
 - [HC-08](http://www.hc01.com/downloads/HC-08A%20version%20english%20datasheet.pdf) : Bluetooth module primarily used for logging. It uses 9600 baud rate for communication.
 
+## File Structure
+
+    .
+    ├── Firmware                                # contains required code for controlling the bot
+    │    ├── Core                               # Contains developer code for sensors and other peripherals
+    │    │   ├── As5600                         # Driver Api for AS5600
+    │    │   │   ├── as5600.c                   # Source code for AS5600
+    │    │   │   └── as5600.h                   # Header file for AS5600
+    │    │   ├── Ble_logger                     # Bluetooth logger API using UART
+    │    │   │   ├── ble_logger.c               # Bluetooth logger source code
+    │    │   │   └── ble_logger.h               # Bluetooth logger header file
+    │    │   ├── Drv8833                        # Code for Motor Control
+    │    │   │   ├── drv8833.c                  # Source code for DRV8833
+    │    │   │   └── drv8833.h                  # Header files for DRV8833
+    │    │   ├── Inc                  
+    │    │   │   ├── FreeRTOSConfig.h           # FreeRTOS configuration file
+    │    │   │   ├── main.h                     # Main header file
+    │    │   │   ├── stm32f4xx_hal_conf.h       # STM32 HAL configuration file
+    │    │   │   └── stm32f4xx_it.h             # contains header of interrupt handlers
+    │    │   ├── Mpu6500
+    │    │   │   ├── mpu6500.c                  # Source code for MPU6500 Driver
+    │    │   │   └── mpu6500.h                  # Header file for MPU6500 Driver
+    │    │   ├── Peripheral                     
+    │    │   │   └── I2c                        # I2C API's handler
+    │    │   ├── Src
+    │    │   │   ├── freertos.c                 # FreeRTOS source code
+    │    │   │   ├── main.c                     # Main source code
+    │    │   │   ├── stm32f4xx_hal_msp.c        # MSP initialisation and deinitialiation source code
+    │    │   │   ├── stm32f4xx_it.c             # source code for interrupt handlers
+    │    │   │   └── system_stm32f4xx.c         # CSMSIS peripheral device layer source code
+    │    │   └── Vl6180x
+    │    │       ├── vl6180x.c                  # VL6180x Driver source code
+    │    │       └── vl6180x.h                  # VL6180x header file
+    │    ├── Drivers                            # STM32 Driver Code involving bare metal registers
+    │    ├── Middlewares                        # FreeRTOS APIs for scheduling algorithm
+    │    ├── node_modules                       # HTML modules for viewing STM32 HAL API documentation
+    │    ├── Makefile                           # Automake compilation instructions
+    │    ├── STM32F411CEUx_FLASH.ld             # Linker script for compilation   
+    └────└── node_modules                       # HTML modules for viewing STM32 HAL API
+
 ## Pinout of STM32F405RG
 
 The below image shows the pinout of STM32F405RG that we will be using for this project :
@@ -47,10 +103,31 @@ The below image shows the pinout of STM32F405RG that we will be using for this p
 
 ### Communication Buses
 
-- I2C (Inter-Integrated Circuit) : We use two encoders,so we needed to use two different I2C bus. Vl6180x (ToF) sensor also uses I2C bus communication, so overall 3 I2C bus communication is used.
-- SPI (serial peripheral interface) : MPU6500 supports both I2C as well as SPI, but since SPI offers faster communication , we decided to go with it.
-- UART (Universal Asynchronous Receiver/Transmitter): HC-08 bluetooth module , which will be used for logging functions on UART transmission protocol.
+- I2C (Inter-Integrated Circuit) : We use two encoders(*AS5600*),so we needed to use two different I2C bus. *Vl6180x* (ToF) sensor also uses I2C bus communication, so overall 3 I2C bus communication is used.
+- SPI (serial peripheral interface) : *MPU6500* supports both I2C as well as SPI, but since SPI offers faster communication , we decided to go with it.
+- UART (Universal Asynchronous Receiver/Transmitter): *HC-08* bluetooth module , which will be used for logging functions on UART transmission protocol.
 
+### ADC
+
+- SFH-3015-FA (IR receiver) gives analog signals, so it requires ADC module to read the readings. So we require 4 ADC channels for reading IR sensors
+- To measure voltage level of battery one ADC channel will be required
+
+So overall 5 ADC channels are required.
+
+### PWM
+
+- DRV8833 (Dual H-bridge Motor Driver) requires 4 PWM channel.
+- To control the brightness of 4 SFH-4045N (IR emitter) we need 4 more PWM channels
+- To generate noise in the buzzer we will need 1 more PWM channel.
+
+So in overall we will require 9 PWM channels.
+
+### GPIO
+
+- 2 GPIOs are required for 2 LEDs
+- 1 GPIOs are required for 1 Button
+
+so In overall 3 GPIO pins are used for getting input and output.
 
 ## How To Use The Firmware
 
