@@ -5276,11 +5276,6 @@
       (net 94 "Net-(M1-Pad1)") (pinfunction "VMOT+") (pintype "input") (tstamp d11d6457-3104-4748-a063-cb446a4517e2))
     (pad "2" thru_hole circle (at -7.75 -14.5 270) (size 1 1) (drill 0.5) (layers *.Cu *.Mask)
       (net 100 "Net-(M1-Pad2)") (pinfunction "VMOT-") (pintype "input") (tstamp 6fde08e3-3833-43ca-86f4-48ce5736c9f7))
-    (model "${KIPRJMOD}/component_libraries/mushak_mount_footprint/L_Assem.STEP"
-      (offset (xyz 3 -36.5 -21.5))
-      (scale (xyz 1 1 1))
-      (rotate (xyz -90 0 180))
-    )
   )
 
   (footprint "Resistor_SMD:R_0402_1005Metric" (layer "F.Cu")
@@ -9373,11 +9368,6 @@
       (net 101 "Net-(M2-Pad1)") (pinfunction "VMOT+") (pintype "input") (tstamp d95744a6-f0d6-4fc2-952c-a5221e6b2b62))
     (pad "2" thru_hole circle (at -7.75 14.5 90) (size 1 1) (drill 0.5) (layers *.Cu *.Mask)
       (net 102 "Net-(M2-Pad2)") (pinfunction "VMOT-") (pintype "input") (tstamp b225db63-074f-429f-94cd-fffc415047a3))
-    (model "${KIPRJMOD}/component_libraries/mushak_mount_footprint/R_Assem.STEP"
-      (offset (xyz -29.5 -36.5 20.5))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 90 0 0))
-    )
   )
 
   (footprint "Resistor_SMD:R_0402_1005Metric" (layer "B.Cu")
