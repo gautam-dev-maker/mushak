@@ -634,6 +634,11 @@
     (uuid ff9d08d9-16ae-48cc-9b05-58cfb78fec54)
   )
 
+  (text "MPU6500 Sensor" (at 137.414 139.192 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid f684c042-01ed-4b3b-9193-5f0b9a85a703)
+  )
+
   (hierarchical_label "SCLK" (shape input) (at 121.412 81.534 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c11257b3-a856-4e0e-8f70-2bc90cc1496e)
