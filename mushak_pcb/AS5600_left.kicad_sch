@@ -361,6 +361,11 @@
     (uuid bf47b732-8425-49eb-88e1-6d6a407e77a5)
   )
 
+  (text "Left side magnetic encoder" (at 133.604 77.47 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 5a417f44-820b-4668-bb38-cf8b670343b1)
+  )
+
   (label "GND_s" (at 207.01 102.87 270)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 07b10342-90d9-4558-9b60-49ff36594921)

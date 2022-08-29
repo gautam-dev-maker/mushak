@@ -395,6 +395,11 @@
     (uuid fd282f07-14ff-47bb-a8d6-ea5352229cdd)
   )
 
+  (text "Motor Driver IC" (at 135.255 47.371 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 60732fbc-a982-4f48-b8c3-00c11300583e)
+  )
+
   (global_label "POW_IN" (shape input) (at 120.904 90.17 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 68c9eff7-18e2-4bcc-8751-f120d2c55071)

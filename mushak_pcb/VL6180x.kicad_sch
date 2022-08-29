@@ -345,6 +345,11 @@
     (uuid fa584650-b241-45e7-843e-7f76e4a92240)
   )
 
+  (text "ToF Sensor" (at 140.081 68.58 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 71c7180f-8470-4edd-aefa-9144104b3897)
+  )
+
   (label "SCL_s" (at 95.504 92.964 0)
     (effects (font (size 1 1)) (justify left bottom))
     (uuid 050fc514-6bb0-4fc7-a4d1-9b894496b5bb)

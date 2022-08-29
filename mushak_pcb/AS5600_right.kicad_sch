@@ -361,6 +361,11 @@
     (uuid f889eb61-7446-4c60-abb9-a297b135075a)
   )
 
+  (text "Right side magnetic encoder" (at 130.048 76.073 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 7c3c7401-500e-4902-bbb0-44674fd7dfa7)
+  )
+
   (label "+3V0_s" (at 201.676 91.948 90)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 30600bf7-266e-4058-b357-2dc7c747292a)
