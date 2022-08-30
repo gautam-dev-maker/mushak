@@ -2,9 +2,20 @@
   <img src="https://us.123rf.com/450wm/vectomart/vectomart1808/vectomart180800065/107422713-lord-ganpati-background-for-ganesh-chaturthi-festival-of-india-with-message-meaning-my-lord-ganesha.jpg" width="125" height="125" />
 </p>
 
+# About The Project
+
+Mushak is a micromouse maze solving bot. The aim of this project is to make India's first and smallest half-size micromouse bot. "Mushak" in hindi means "Mouse".
+
+This micromouse consist of a very small coreless motors (6 mm width and 10 mm length) and PCB as it's base . Since coreless motors doesn't provide enough torque for the movements of bot we used gear box to increase the torque.
+
+Mushak is of size 45.7mm x 40.0 mm, which is smaller than similar micromouse using STM32F405RG. We boast of least area consuming micromouse made using STM32 LQFP64 package chips.
+
+| ![](/assets/Micromouse.PNG)            | ![](./assets/3d_pcb_render.png) |
+:-------------------------:|:-------------------------:
+
 # Table of Content
-- [Table of Content](#table-of-content)
 - [About The Project](#about-the-project)
+- [Table of Content](#table-of-content)
 - [File Structure](#file-structure)
 - [PCB Design](#pcb-design)
     - [Major components used in the PCB include -](#major-components-used-in-the-pcb-include--)
@@ -38,18 +49,6 @@
 - [Resources](#resources)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
-
-
-# About The Project
-
-Mushak is a micromouse maze solving bot. The aim of this project is to make India's first and smallest half-size micromouse bot. "Mushak" in hindi means "Mouse".
-
-This micromouse consist of a very small coreless motors (6 mm width and 10 mm length) and PCB as it's base . Since coreless motors doesn't provide enough torque for the movements of bot we used gear box to increase the torque.
-
-Mushak is of size 45.7mm x 40.0 mm, which is smaller than similar micromouse using STM32F405RG. We boast of least area consuming micromouse made using STM32 LQFP64 package chips.
-
-| ![](/assets/Micromouse.PNG)            | ![](./assets/3d_pcb_render.png) |
-:-------------------------:|:-------------------------:
 
 # File Structure
 
