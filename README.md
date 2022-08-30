@@ -227,7 +227,6 @@ CAD design consist of 3D modeling of Bot design.Before design can be made on PCB
    <img src="./assets/IR_mount.png" width="200"/> | IR_mounts - These are the mounts for IR sensors placed </br> at specific angles. SFH-3015-FA and SFH-4045N sensors are phototransistors and IR emitters respectively.|   
    <img src="./assets/gears.png" width="200"/> | Gears - The metal gears were extracted from mg90s servos having dimensions: </br> Driving gear:</br> &emsp; &emsp; &emsp;&emsp; &emsp;Teeth 9 </br> &emsp; &emsp; &emsp;&emsp; &emsp;Pressure Angle - 20º</br> &emsp; &emsp; &emsp;&emsp; &emsp;ID - 0.5, OD - 2.14 mm</br> &emsp; &emsp; &emsp;&emsp; &emsp;Width 2.46 mm</br> Driven gear: </br> &emsp; &emsp; &emsp;&emsp; &emsp;Teeth 47 </br> &emsp; &emsp; &emsp;&emsp; &emsp;Pressure Angle 20º</br> &emsp; &emsp; &emsp;&emsp; &emsp;ID - 1.5mm, OD - 9.55 mm</br> &emsp; &emsp; &emsp;&emsp; &emsp; Width 1.2 mm.</br> Center to center distance is 5.80mm and modulus 0.195</br>| 
    <img src="./assets/others_1.png" width="200"/> | Bearings, shaft and Wheels - These are the passive components used.</br> Bearings x4 of dimensions: ID x OD 1.5 x 4 mm.</br> Shaft x2 of dimensions: Length x Dia. 15 x 1.5 mm.</br> Wheels with dimensions: ID x OD 1.5 x 12.5 mm.</br> A combination of 2 bearings is used to house the shaft for better stability and lesser Vibrations.|
-   || IC's and Battery - The IC's used in CAD model are with their actual dimensions.</br> Lipo battery of dimension: 1.5 x 2.5 mm.|
 </p>
 
 **NOTE** : 
