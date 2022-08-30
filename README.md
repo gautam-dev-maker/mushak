@@ -6,6 +6,24 @@
 - [Table of Content](#table-of-content)
 - [About The Project](#about-the-project)
 - [File Structure](#file-structure)
+- [PCB Design](#pcb-design)
+    - [Major components used in the PCB include -](#major-components-used-in-the-pcb-include--)
+  - [IR sensors](#ir-sensors)
+  - [Power Distribution](#power-distribution)
+  - [STM32F405RG (Microcontroller)](#stm32f405rg-microcontroller)
+  - [DRV8833 (Motor Driver)](#drv8833-motor-driver)
+  - [VL6180X (ToF Sensor)](#vl6180x-tof-sensor)
+  - [HC-08 (BLE Module)](#hc-08-ble-module)
+  - [AS5600 (Magnetic Encoder)](#as5600-magnetic-encoder)
+  - [MPU6500 (IMU)](#mpu6500-imu)
+  - [Routing](#routing)
+  - [Solutions to some of the major problems faced while designing PCB](#solutions-to-some-of-the-major-problems-faced-while-designing-pcb)
+- [CAD Design](#cad-design)
+  - [Part Descriptions](#part-descriptions)
+  - [Issues Faced in Mechanical Designing](#issues-faced-in-mechanical-designing)
+    - [Designing Mount](#designing-mount)
+    - [Finalising and Meshing the gears](#finalising-and-meshing-the-gears)
+  - [Additional Materials](#additional-materials)
 - [Firmware](#firmware)
   - [File Structure](#file-structure-1)
   - [Pinout of STM32F405RG](#pinout-of-stm32f405rg)
@@ -27,18 +45,185 @@
 
 Mushak is a micromouse maze solving bot. The aim of this project is to make India's first and smallest half-size micromouse bot. "Mushak" in hindi means "Mouse".
 
-This micromouse consist of a very small coreless motors (6 mm width and 10 mm length) and PCB as it's base . Since coreless motors doesn't provide enough torque for the movements of bot we used gear box to increase the torque. 
+This micromouse consist of a very small coreless motors (6 mm width and 10 mm length) and PCB as it's base . Since coreless motors doesn't provide enough torque for the movements of bot we used gear box to increase the torque.
+
+<p align="center">
+  <img src="./assets/Micromouse.PNG" width="700"/>
+</p>
 
 # File Structure
 
     .
     ├── Assets             # Documentation files screenshots, gifs, videos of results
     ├── firmware           # contains required code for controlling the bot
-    ├── mushak_pcb         # PCB files made in  kicad 6
+    ├── pcb_design         # PCB files made in  kicad 6
+    ├── cad_design         # CAD files of mushak (micromouse)
     ├── LICENSE            # License for this project
     └── README.md          # Contains documentation and information about this project
 
-Further file structure of each folder is given in below sections
+Further file structure of each folder is given in below sections.
+
+# PCB Design
+
+The Mushak PCB design is made on the latest version of KiCAD 6.
+
+Mushak is designed over STM32F405RG microcontroller accomodated eith various sensors and drivers for the micromouse.
+
+We designed the smallest micromouse that is based on STM32F405RG microcontroller
+
+<p align="center">
+  <img src="./assets/pcb_notation.png" width="700"/>
+</p>
+
+### Major components used in the PCB include -
+
+- STM32F405RG - Microcontroller
+- VL6180x - ToF sensor4
+- DRV8833 - Motor Driver
+- MPU6500 - IMU
+- SFH-4045N - Infrared Emitter
+- SFH-3015-FA - Phototransistor (Reciever)
+
+
+---
+
+
+
+
+## IR sensors
+
+The IR sensors include majorly two components, IR emitter which emits the Infrared light of a perticular wavelength which is not visible with the human eye. 
+
+This light gets reflected back from the obstacle present in fromt of the robot to the photo transistor, when the Infrared light of this perticular wavelenght enters the phototransistor device it allows the current to flow from the collecotr to the emmiter of device. This current flow creates a voltage drop across the resistor connected with the photo transistor and this voltage drop is read by th ADC of the microcontroller which varies as the intensity of light reflected changes. By this way we can determine how far is the obstacle from the robot.
+
+For controlling the intensity of the transmitted light we used N-Channel Mosfet whose gate is controlled by PWM signal given by the microcontroller.
+By varying the PWM duty cycle we can control the intensity of the transmitted light from IR emmiter by which we can control the distance sensitivity.
+
+4 Sensor pairs are being used in Mushak (Micromouse)
+
+---
+
+## Power Distribution
+Power to the control circuits is provided by 3V linear Regulator(LDO) which can provide upto 1A current. Power to the motor is directly given to the motor driver through battery.
+Additional capacitors are added across outputs for filtering out the voltage. Voltage divider resistors are being used to monitor the battery voltage. Power indication LED has been provided in the PCB. The input voltage for the PCB is 3.7 voltage through a general LiPo battery.
+
+--- 
+
+## STM32F405RG (Microcontroller)
+
+The below image shows the pinout of STM32F405RG that we will be using for this project :
+
+![](assets/stm32f405rg_pinout.png)
+
+Decoupling capacitors of 0.1uF are connected near the vdd pins of STM32. Additional external low and high frequency oscillators are added for precise timing.
+
+- HSE(High Speed External) clock - 25 Mhz
+- LSE(Low Speed External) clock - 32.769 Khz
+
+Filter circuit is being used for filtering out the analog reference voltage. Additional Debug switches are being added for debugging purposes
+
+---
+## DRV8833 (Motor Driver)
+
+We have used H-bridge motor driver which can control two motors at the same time via PWM (pulse width modulation) from the STM32F405RG (microcontroller).
+
+The motor driver can supply 1.5 Amps of current per motor which is enough to power up the coreless motors. 
+
+This motor driver keeps the controls terminals from the microcontrolller isolated from noise and high volatages of the motor power supply.
+
+---
+
+## VL6180X (ToF Sensor)
+
+We added a Time of Flight sensor in front of the robot to measure the distance of the obstacle in front from the robot.
+
+This sensor measures the time taken by the light signal to get reflected from the obstacle and then measures the distace of the obstacle from the robot.
+
+The sensor uses I2C protocol for communication with the microcontroller and send the distance values. It also has an additional feature of sensing the ambeint light which we can use to avoid the problems faced with IR sensors due to varing ambient light conditions.
+
+---
+
+## HC-08 (BLE Module)
+
+We used a BLE(Bluetooth Low Energy) module to talk to the robot. It is one of the most important modules that is being used in mushak, this bluetooth module will eanble us to talk with the robot and precisely tune it to solve the mazes, additionally it makes debugging easier for us making Mushak user friendly.
+
+The module consumes very less power and works on UART communication to talk with the microcontroller.
+
+For attaching this module we have provided the JST connectors to connect this module externally when required.
+
+---
+
+## AS5600 (Magnetic Encoder)
+
+To measure the RPM and teh distance that the robot has covered we needed a type of encoder feedback. For this we used AS5600 magnetic encoders to measure the amount of rotation of the robot wheel.
+
+The magnetic encoders are mounted in an innovative way due to which no external mounts were required for their placement.
+
+The sensor works on I2C communication protocol to provide the feedback to the microcontroller.
+
+---
+
+## MPU6500 (IMU)
+
+This sensor gives the feedback of orientaion of the robot. This MEMS based chip has in-built Acclereometer and Gyroscope by which it can determine its orietation with respect to space.
+
+This sensor works on SPI as well as I2C communication protocol but in our case to get the fastest data transfer, we used use SPI communcation.
+
+---
+
+## Routing
+
+For routing of the control circuitry we used traces of 0.2mm width and for power connections we used 0.4mm width tracks to ensure fairly hihg current flow.
+
+These are some images of the routing done on Mushak -
+## Solutions to some of the major problems faced while designing PCB
+
+1) Minimalising passive components is a really hard task. So to solve this I properly reffered the application notes and datasheet of stm32f405RG. Moreover the design is well tested on simulation platform.
+
+2) Efficient placement of components to reduce the size of the PCB. Innovative design to fix sensors and encoders in such a small space.
+
+3) Since IRs are sensitive to ambient light we required a mechanism to adjust the brighness of IR Emitter. So to do that we used a mosfet based circuit, so brightness can be controlled using PWM.
+
+4) It was a big challenge to place 90+ SMD and THT components on a small size PCB of just 45.7x40mm size.
+
+# CAD Design
+## Part Descriptions
+* The bot contains a total of 6 main **mechanical** components which are as listed in the following table :
+
+
+|     Parts             |          Description          |
+| --------------------- | ----------------------------- |
+| <p align="center">
+  <img src="./assets/motor.png" width="200"/> | Motors - This is the motor we are using, which has </br> dimensions: Length x Dia. 12 x 6 mm and a shaft lenght of 6mm.|
+  <img src="./assets/mount.PNG" width="200"/> | Motor_mount - This is the mount for the motors, which holds </br> the motor, shaft, gears, bearing and magnet.Because of less center-to-center distance between gears, after many iterations this mount was designed.|
+  <img src="./assets/tof_mount.png" width="200"/> | TOF_mount - This is the mount for TOF sensor, which is placed </br> in front. We have used VL6180x TOF sensor.|  
+   <img src="./assets/IR_mount.png" width="200"/> | IR_mounts - These are the mounts for IR sensors placed </br> at specific angles. SFH-3015-FA and SFH-4045N sensors are phototransistors and IR emitters respectively.|   
+   <img src="./assets/gears.png" width="200"/> | Gears - The metal gears were extracted from mg90s servos having dimensions: </br> Driving gear:</br> &emsp; &emsp; &emsp;&emsp; &emsp;Teeth 9 </br> &emsp; &emsp; &emsp;&emsp; &emsp;Pressure Angle - 20º</br> &emsp; &emsp; &emsp;&emsp; &emsp;ID - 0.5, OD - 2.14 mm</br> &emsp; &emsp; &emsp;&emsp; &emsp;Width 2.46 mm</br> Driven gear: </br> &emsp; &emsp; &emsp;&emsp; &emsp;Teeth 47 </br> &emsp; &emsp; &emsp;&emsp; &emsp;Pressure Angle 20º</br> &emsp; &emsp; &emsp;&emsp; &emsp;ID - 1.5mm, OD - 9.55 mm</br> &emsp; &emsp; &emsp;&emsp; &emsp; Width 1.2 mm.</br> Center to center distance is 5.80mm and modulus 0.195</br>| 
+   <img src="./assets/others_1.png" width="200"/> | Bearings, shaft and Wheels - These are the passive components used.</br> Bearings x4 of dimensions: ID x OD 1.5 x 4 mm.</br> Shaft x2 of dimensions: Length x Dia. 15 x 1.5 mm.</br> Wheels with dimensions: ID x OD 1.5 x 12.5 mm.</br> A combination of 2 bearings is used to house the shaft for better stability and lesser Vibrations.|
+   || IC's and Battery - The IC's used in CAD model are with their actual dimensions.</br> Lipo battery of dimension: 1.5 x 2.5 mm.|
+</p>
+
+**NOTE** : 
+* ID is abbreviation for Internal Diameter.
+* OD is abbreviation for Outer Diameter.
+
+## Issues Faced in Mechanical Designing 
+### Designing Mount 
+  
+* **Issue** : The main issues faced in designing the Mount were As the Gears acquired were of a smaller diameter, there was an issue of interference between the bearing and the motor. As they were too close, it was impossible to 3D print a mount with the thickness less than 1mm.
+* **Solution** : The solution opted for this was to actually disalign the motor and the shaft to give room the bearing housing to be #d printed. This enabled us to print a more stable base due to the stronger Shaft housing.
+Below images demonstrate how it was done.
+<p float="left"><img src="./assets/mount.PNG" width="200"/><img src="./assets/mount_assem.PNG" width="200"/><img src="./assets/mount_assem_transparent.PNG" width="200"/><img src="./assets/mount_full.PNG" width="200"/>|
+  
+### Finalising and Meshing the gears
+  
+* **Issue** : As there are a varieties of gears available. It was hard for us to choose the right combination and Built the Model and mounts around it.
+* **Solution** : We started with finalising the sizes and the gear ratios needed according to the available spaces. We then did the market research to find the gears closest to our needs and incorporated those models into the Design.
+
+<p align="center"><img src="./assets/gears.png" width="200"/>
+
+## Additional Materials
+* Refer the following [playlist](https://www.youtube.com/watch?v=Ulttc_2p4DY&list=PLrOFa8sDv6jcp8E3ayUFZ4iNI8uuPjXHe) to sharpen you skills in SolidWorks
 
 # Firmware
 
