@@ -23,7 +23,6 @@
   - [Issues Faced in Mechanical Designing](#issues-faced-in-mechanical-designing)
     - [Designing Mount](#designing-mount)
     - [Finalising and Meshing the gears](#finalising-and-meshing-the-gears)
-  - [Additional Materials](#additional-materials)
 - [Firmware](#firmware)
   - [File Structure](#file-structure-1)
   - [Pinout of STM32F405RG](#pinout-of-stm32f405rg)
@@ -91,22 +90,22 @@ We designed the smallest micromouse that is based on STM32F405RG microcontroller
 
 ## IR sensors
 
-The IR sensors include majorly two components, IR emitter which emits the Infrared light of a particular wavelength which is not visible with the human eye. 
+* The IR sensors include majorly two components, IR emitter which emits the Infrared light of a particular wavelength which is not visible with the human eye. 
 
-This light gets reflected back from the obstacle present in form of the robot to the photo transistor, when the Infrared light of this perticular wavelength enters the phototransistor device it allows the current to flow from the collector to the emmiter of device. This current flow creates a voltage drop across the resistor connected with the photo transistor and this voltage drop is read by th ADC of the microcontroller which varies as the intensity of light reflected changes. By this way we can determine how far is the obstacle from the robot.
+* This light gets reflected back from the obstacle present in form of the robot to the photo transistor, when the Infrared light of this perticular wavelength enters the phototransistor device it allows the current to flow from the collector to the emmiter of device. This current flow creates a voltage drop across the resistor connected with the photo transistor and this voltage drop is read by th ADC of the microcontroller which varies as the intensity of light reflected changes. By this way we can determine how far is the obstacle from the robot.
 
-For controlling the intensity of the transmitted light we used N-Channel Mosfet whose gate is controlled by PWM signal given by the microcontroller.
+* For controlling the intensity of the transmitted light we used N-Channel Mosfet whose gate is controlled by PWM signal given by the microcontroller.
 By varying the PWM duty cycle we can control the intensity of the transmitted light from IR emmiter by which we can control the distance sensitivity.
 
 ![](./assets/IR_schematics.png)
 
-4 Sensor pairs are being used in Mushak (Micromouse)
+* Four Sensor pairs are being used in Mushak (Micromouse)
 
 ---
 
 ## Power Distribution
-Power to the control circuits is provided by 3V linear Regulator(LDO) which can provide upto 1A current. Power to the motor is directly given to the motor driver through battery.
-Additional capacitors are added across outputs for filtering out the voltage. Voltage divider resistors are being used to monitor the battery voltage. Power indication LED has been provided in the PCB. The input voltage for the PCB is 3.7 voltage through a general LiPo battery.
+* Power to the control circuits is provided by 3V linear Regulator(LDO) which can provide upto 1A current. Power to the motor is directly given to the motor driver through battery.
+* Additional capacitors are added across outputs for filtering out the voltage. Voltage divider resistors are being used to monitor the battery voltage. Power indication LED has been provided in the PCB. The input voltage for the PCB is 3.7 voltage through a general LiPo battery.
 
 ![](./assets/ldo.png)
 
@@ -128,11 +127,11 @@ Filter circuit is being used for filtering out the analog reference voltage. Add
 ---
 ## DRV8833 (Motor Driver)
 
-We have used H-bridge motor driver which can control two motors at the same time via PWM (pulse width modulation) from the STM32F405RG (microcontroller).
+* We have used H-bridge motor driver which can control two motors at the same time via PWM (pulse width modulation) from the STM32F405RG (microcontroller).
 
-The motor driver can supply 1.5 Amps of current per motor which is enough to power up the coreless motors. 
+* The motor driver can supply 1.5 Amps of current per motor which is enough to power up the coreless motors. 
 
-This motor driver keeps the controls terminals from the microcontrolller isolated from noise and high volatages of the motor power supply.
+* This motor driver keeps the controls terminals from the microcontrolller isolated from noise and high volatages of the motor power supply.
 
 ![](./assets/drv8833.png)
 
@@ -140,59 +139,60 @@ This motor driver keeps the controls terminals from the microcontrolller isolate
 
 ## VL6180X (ToF Sensor)
 
-We added a Time of Flight sensor in front of the robot to measure the distance of the obstacle in front from the robot.
+* We added a Time of Flight sensor in front of the robot to measure the distance of the obstacle in front from the robot.
 
-This sensor measures the time taken by the light signal to get reflected from the obstacle and then measures the distace of the obstacle from the robot.
+* This sensor measures the time taken by the light signal to get reflected from the obstacle and then measures the distace of the obstacle from the robot.
 
 ![](./assets/tof.png)
 
-The sensor uses I2C protocol for communication with the microcontroller and send the distance values. It also has an additional feature of sensing the ambeint light which we can use to avoid the problems faced with IR sensors due to varing ambient light conditions.
+* The sensor uses I2C protocol for communication with the microcontroller and send the distance values. It also has an additional feature of sensing the ambeint light which we can use to avoid the problems faced with IR sensors due to varing ambient light conditions.
+* Due to cost issues it is not feasible to replace IR sensors with VL6180x, else it could have been a replacement.
 
 ---
 
 ## HC-08 (BLE Module)
 
-We used a BLE(Bluetooth Low Energy) module to talk to the robot. It is one of the most important modules that is being used in mushak, this bluetooth module will enable us to communicate with the robot and precisely tune it to solve the mazes, additionally it makes debugging easier for us making Mushak user friendly.
+* We used a BLE(Bluetooth Low Energy) module to communicate to the robot. It is one of the most important modules that is being used in mushak, this bluetooth module will enable us to communicate with the robot and precisely tune it to solve the mazes, additionally it makes debugging easier for us making Mushak user friendly.
 
-The module consumes very less power and works on UART communication to talk with the microcontroller.
+* The module consumes very less power(since it works on BLE) and works on UART communication to talk with the microcontroller.
 
 ![](./assets/HC08.png)
 
-For attaching this module we have provided the JST connectors to connect this module externally when required.
+* For attaching this module we have provided the JST connectors to connect this module externally when required.
 
 ---
 
 ## AS5600 (Magnetic Encoder)
 
-To measure the RPM and the distance that the robot has covered we needed a type of encoder feedback. For this we used AS5600 magnetic encoders to measure the amount of rotation of the robot wheel.
+* To measure the RPM and the distance that the robot has covered we needed a type of encoder feedback. For this we used AS5600 magnetic encoders to measure the amount of rotation of the robot wheel.
 
-The magnetic encoders are mounted in an innovative way due to which no external mounts were required for their placement.
+* The magnetic encoders are mounted in an innovative way due to which no external mounts were required for their placement. Since magnets need to be right infront of the IC of AS5600 to get proper reading, we have taken extra care with mount size and shaft placement.
 
 ![](./assets/as5600.png)
 
-The sensor works on I2C communication protocol to provide the feedback to the microcontroller.
+* The sensor works on I2C communication protocol to provide the reading to the microcontroller.
 
 ---
 
 ## MPU6500 (IMU)
 
-This sensor gives the feedback of orientaion of the robot. This MEMS based chip has in-built Acclereometer and Gyroscope by which it can determine its orietation with respect to space.
+* This sensor gives the feedback of orientaion of the robot. This MEMS based chip has in-built Acclereometer and Gyroscope by which it can determine its orietation with respect to space.
 
-This sensor works on SPI as well as I2C communication protocol but in our case to get the fastest data transfer, we used use SPI communcation.
+* This sensor works on SPI as well as I2C communication protocol but in our case to get the fastest data transfer, we used use SPI communcation.
 
 ---
 
 ## Routing
 
-Front Copper Layer:
+* Front Copper Layer:
 
 ![](./assets/Fcu.png)
 
-Back Copper Layer:
+* Back Copper Layer:
 
 ![](./assets/Bcu.png)
 
-Final Routing:
+* Final Routing:
 
 ![](./assets/final_routing.png)
 
@@ -249,9 +249,6 @@ Below images demonstrate how it was done.
 * **Solution** : We started with finalising the sizes and the gear ratios needed according to the available spaces. We then did the market research to find the gears closest to our needs and incorporated those models into the Design.
 
 <p align="center"><img src="./assets/gears.png" width="200"/>
-
-## Additional Materials
-* Refer the following [playlist](https://www.youtube.com/watch?v=Ulttc_2p4DY&list=PLrOFa8sDv6jcp8E3ayUFZ4iNI8uuPjXHe) to sharpen you skills in SolidWorks
 
 # Firmware
 
@@ -400,6 +397,7 @@ make flash  # Currently only st-link support is added
 * [Phase-lead controller](https://micromouseonline.com/2011/05/16/designing-a-phase-lead-controller/) an alternative to PID control systems for micromouse.
 * [Slip Compensation](https://robotics.stackexchange.com/questions/1658/implementing-slip-compensation-into-a-half-size-micromouse) discussion on how to compensate slip in micromouse which becomes a serious issue
 * [Kerise v5](https://github.com/kerikun11/micromouse-kerise-v5) Smallest micromouse ever made, contains good documentation of design,pcb and code.
+* [SolidWorks Tutorial](https://www.youtube.com/watch?v=Ulttc_2p4DY&list=PLrOFa8sDv6jcp8E3ayUFZ4iNI8uuPjXHe) to sharpen you skills in SolidWorks.
 
 # Acknowledgements
 * [SRA VJTI](http://sravjti.in) for providing us with required resources and support.
