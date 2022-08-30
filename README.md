@@ -103,9 +103,9 @@ The below image shows the pinout of STM32F405RG that we will be using for this p
 
 ### Communication Buses
 
-- I2C (Inter-Integrated Circuit) : We use two encoders(*AS5600*),so we needed to use two different I2C bus. *Vl6180x* (ToF) sensor also uses I2C bus communication, so overall 3 I2C bus communication is used.
-- SPI (serial peripheral interface) : *MPU6500* supports both I2C as well as SPI, but since SPI offers faster communication , we decided to go with it.
-- UART (Universal Asynchronous Receiver/Transmitter): *HC-08* bluetooth module , which will be used for logging functions on UART transmission protocol.
+- **I2C (Inter-Integrated Circuit)** : We use two encoders(*AS5600*),so we needed to use two different I2C bus. *Vl6180x* (ToF) sensor also uses I2C bus communication, so overall 3 I2C bus communication is used.
+- **SPI (serial peripheral interface)** : *MPU6500* supports both I2C as well as SPI, but since SPI offers faster communication , we decided to go with it.
+- **UART (Universal Asynchronous Receiver/Transmitter)**: *HC-08* bluetooth module , which will be used for logging functions on UART transmission protocol.
 
 ### ADC
 
