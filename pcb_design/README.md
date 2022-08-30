@@ -1,6 +1,6 @@
 # PCB Design
 
-![](assets/3d_pcb_render.png)
+![](../assets/3d_pcb_render.png)
 
 The Mushak PCB design is made on the latest version of KiCAD 6.
 
@@ -32,7 +32,7 @@ This light gets reflected back from the obstacle present in fromt of the robot t
 For controlling the intensity of the transmitted light we used N-Channel Mosfet whose gate is controlled by PWM signal given by the microcontroller.
 By varying the PWM duty cycle we can control the intensity of the transmitted light from IR emmiter by which we can control the distance sensitivity.
 
-![](assets/IR_schematics.png)
+![](../assets/IR_schematics.png)
 
 4 Sensor pairs are being used in Mushak (Micromouse)
 
@@ -42,7 +42,7 @@ By varying the PWM duty cycle we can control the intensity of the transmitted li
 Power to the control circuits is provided by 3V linear Regulator(LDO) which can provide upto 1A current. Power to the motor is directly given to the motor driver through battery.
 Additional capacitors are added across outputs for filtering out the voltage. Voltage divider resistors are being used to monitor the battery voltage. Power indication LED has been provided in the PCB. The input voltage for the PCB is 3.7 voltage through a general LiPo battery.
 
-![](assets/ldo.png)
+![](../assets/ldo.png)
 
 --- 
 
@@ -50,7 +50,7 @@ Additional capacitors are added across outputs for filtering out the voltage. Vo
 
 The below image shows the pinout of STM32F405RG that we will be using for this project :
 
-![](assets/stm32f405rg_pinout.png)
+![](../assets/stm32f405rg_pinout.png)
 
 Decoupling capacitors of 0.1uF are connected near the vdd pins of STM32. Additional external low and high frequency oscillators are added for precise timing.
 
@@ -68,7 +68,7 @@ The motor driver can supply 1.5 Amps of current per motor which is enough to pow
 
 This motor driver keeps the controls terminals from the microcontrolller isolated from noise and high volatages of the motor power supply.
 
-![](assets/drv8833.png)
+![](../assets/drv8833.png)
 
 ---
 
@@ -78,7 +78,7 @@ We added a Time of Flight sensor in front of the robot to measure the distance o
 
 This sensor measures the time taken by the light signal to get reflected from the obstacle and then measures the distace of the obstacle from the robot.
 
-![](assets/tof.png)
+![](../assets/tof.png)
 
 The sensor uses I2C protocol for communication with the microcontroller and send the distance values. It also has an additional feature of sensing the ambeint light which we can use to avoid the problems faced with IR sensors due to varing ambient light conditions.
 
@@ -90,7 +90,7 @@ We used a BLE(Bluetooth Low Energy) module to talk to the robot. It is one of th
 
 The module consumes very less power and works on UART communication to talk with the microcontroller.
 
-![](assets/HC08.png)
+![](../assets/HC08.png)
 
 For attaching this module we have provided the JST connectors to connect this module externally when required.
 
@@ -102,7 +102,7 @@ To measure the RPM and teh distance that the robot has covered we needed a type 
 
 The magnetic encoders are mounted in an innovative way due to which no external mounts were required for their placement.
 
-![](assets/as5600.png)
+![](../assets/as5600.png)
 
 The sensor works on I2C communication protocol to provide the feedback to the microcontroller.
 
@@ -120,15 +120,15 @@ This sensor works on SPI as well as I2C communication protocol but in our case t
 
 Front Copper Layer:
 
-![](assets/Fcu.png)
+![](../assets/Fcu.png)
 
 Back Copper Layer:
 
-![](assets/Bcu.png)
+![](../assets/Bcu.png)
 
 Final Routing:
 
-![](assets/final_routing.png)
+![](../assets/final_routing.png)
 
 For routing of the control circuitry we used traces of 0.2mm width and for power connections we used 0.4mm width tracks to ensure fairly high current flow.
 
@@ -139,7 +139,7 @@ These are some images of the routing done on Mushak -
 
 2) Efficient placement of components to reduce the size of the PCB. Innovative design to fix sensors and encoders in such a small space.
 
-![](assets/comp_placement.png)
+![](../assets/comp_placement.png)
 
 3) Since IRs are sensitive to ambient light we required a mechanism to adjust the brighness of IR Emitter. So to do that we used a mosfet based circuit, so brightness can be controlled using PWM.
 
