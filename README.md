@@ -91,9 +91,9 @@ We designed the smallest micromouse that is based on STM32F405RG microcontroller
 
 ## IR sensors
 
-The IR sensors include majorly two components, IR emitter which emits the Infrared light of a perticular wavelength which is not visible with the human eye. 
+The IR sensors include majorly two components, IR emitter which emits the Infrared light of a particular wavelength which is not visible with the human eye. 
 
-This light gets reflected back from the obstacle present in fromt of the robot to the photo transistor, when the Infrared light of this perticular wavelength enters the phototransistor device it allows the current to flow from the collector to the emmiter of device. This current flow creates a voltage drop across the resistor connected with the photo transistor and this voltage drop is read by th ADC of the microcontroller which varies as the intensity of light reflected changes. By this way we can determine how far is the obstacle from the robot.
+This light gets reflected back from the obstacle present in form of the robot to the photo transistor, when the Infrared light of this perticular wavelength enters the phototransistor device it allows the current to flow from the collector to the emmiter of device. This current flow creates a voltage drop across the resistor connected with the photo transistor and this voltage drop is read by th ADC of the microcontroller which varies as the intensity of light reflected changes. By this way we can determine how far is the obstacle from the robot.
 
 For controlling the intensity of the transmitted light we used N-Channel Mosfet whose gate is controlled by PWM signal given by the microcontroller.
 By varying the PWM duty cycle we can control the intensity of the transmitted light from IR emmiter by which we can control the distance sensitivity.
@@ -152,7 +152,7 @@ The sensor uses I2C protocol for communication with the microcontroller and send
 
 ## HC-08 (BLE Module)
 
-We used a BLE(Bluetooth Low Energy) module to talk to the robot. It is one of the most important modules that is being used in mushak, this bluetooth module will eanble us to talk with the robot and precisely tune it to solve the mazes, additionally it makes debugging easier for us making Mushak user friendly.
+We used a BLE(Bluetooth Low Energy) module to talk to the robot. It is one of the most important modules that is being used in mushak, this bluetooth module will enable us to communicate with the robot and precisely tune it to solve the mazes, additionally it makes debugging easier for us making Mushak user friendly.
 
 The module consumes very less power and works on UART communication to talk with the microcontroller.
 
@@ -164,7 +164,7 @@ For attaching this module we have provided the JST connectors to connect this mo
 
 ## AS5600 (Magnetic Encoder)
 
-To measure the RPM and teh distance that the robot has covered we needed a type of encoder feedback. For this we used AS5600 magnetic encoders to measure the amount of rotation of the robot wheel.
+To measure the RPM and the distance that the robot has covered we needed a type of encoder feedback. For this we used AS5600 magnetic encoders to measure the amount of rotation of the robot wheel.
 
 The magnetic encoders are mounted in an innovative way due to which no external mounts were required for their placement.
 
@@ -221,7 +221,7 @@ CAD design consist of 3D modeling of Bot design.Before design can be made on PCB
 |     Parts             |          Description          |
 | --------------------- | ----------------------------- |
 | <p align="center">
-  <img src="./assets/motor.png" width="200"/> | Motors - This is the motor we are using, which has </br> dimensions: Length x Dia. 12 x 6 mm and a shaft lenght of 6mm.|
+  <img src="./assets/motor.png" width="200"/> | Motors - This motor has </br> dimensions: Length x Dia. 12 x 6 mm and a shaft lenght of 6mm.|
   <img src="./assets/mount.PNG" width="200"/> | Motor_mount - This is the mount for the motors, which holds </br> the motor, shaft, gears, bearing and magnet.Because of less center-to-center distance between gears, after many iterations this mount was designed.|
   <img src="./assets/tof_mount.png" width="200"/> | TOF_mount - This is the mount for TOF sensor, which is placed </br> in front. We have used VL6180x TOF sensor.|  
    <img src="./assets/IR_mount.png" width="200"/> | IR_mounts - These are the mounts for IR sensors placed </br> at specific angles. SFH-3015-FA and SFH-4045N sensors are phototransistors and IR emitters respectively.|   
@@ -237,7 +237,7 @@ CAD design consist of 3D modeling of Bot design.Before design can be made on PCB
 ### Designing Mount 
   
 * **Issue** : The main issues faced in designing the Mount were As the Gears acquired were of a smaller diameter, there was an issue of interference between the bearing and the motor. As they were too close, it was impossible to 3D print a mount with the thickness less than 1mm.
-* **Solution** : The solution opted for this was to actually disalign the motor and the shaft to give room the bearing housing to be #d printed. This enabled us to print a more stable base due to the stronger Shaft housing.
+* **Solution** : The solution opted for this was to actually disalign the motor and the shaft to give room the bearing housing to be 3D printed. This enabled us to print a more stable base due to the stronger Shaft housing.
 Below images demonstrate how it was done.
 
 | ![](./assets/mount.PNG)            | ![](./assets/mount_assem.PNG) | ![](./assets/mount_assem_transparent.PNG) | ![](./assets/mount_full.PNG) |
