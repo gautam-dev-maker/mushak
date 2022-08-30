@@ -240,7 +240,9 @@ CAD design consist of 3D modeling of Bot design.Before design can be made on PCB
 * **Issue** : The main issues faced in designing the Mount were As the Gears acquired were of a smaller diameter, there was an issue of interference between the bearing and the motor. As they were too close, it was impossible to 3D print a mount with the thickness less than 1mm.
 * **Solution** : The solution opted for this was to actually disalign the motor and the shaft to give room the bearing housing to be #d printed. This enabled us to print a more stable base due to the stronger Shaft housing.
 Below images demonstrate how it was done.
-<p float="left"><img src="./assets/mount.PNG" width="200"/><img src="./assets/mount_assem.PNG" width="200"/><img src="./assets/mount_assem_transparent.PNG" width="200"/><img src="./assets/mount_full.PNG" width="200"/>|
+
+| ![](./assets/mount.PNG)            | ![](./assets/mount_assem.PNG) | ![](./assets/mount_assem_transparent.PNG) | ![](./assets/mount_full.PNG) |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
   
 ### Finalising and Meshing the gears
   
