@@ -20,6 +20,7 @@ Mushak is of size 45.7mm x 40.0 mm, which is smaller than similar micromouse usi
 - [PCB Design](#pcb-design)
     - [Major components used in the PCB include -](#major-components-used-in-the-pcb-include--)
   - [IR sensors](#ir-sensors)
+    - [Placement of IR Sensors](#placement-of-ir-sensors)
   - [Power Distribution](#power-distribution)
   - [STM32F405RG (Microcontroller)](#stm32f405rg-microcontroller)
   - [DRV8833 (Motor Driver)](#drv8833-motor-driver)
@@ -101,6 +102,22 @@ By varying the PWM duty cycle we can control the intensity of the transmitted li
 ![](./assets/IR_schematics.png)
 
 * Four Sensor pairs are being used in Mushak (Micromouse)
+
+### Placement of IR Sensors
+
+Placing IR sensors pose a challenge, and required rigorous testing and brain storming. 
+
+![](./assets/ir_placment.png)
+
+As can be seen in the image above we have visualised 2 cell based maze and bot is placed in first cell.
+
+* `IR1` (blue rays) is pointing to the left mid point of next cell.
+* `IR2` (orange rays) is pointing to the left end of current cell.
+* `IR3` (pink rays) is pointing to the right end of current cell.
+* `IR4` (green rays) is pointing to the right end of current cell.
+
+To move the bot in straight line along the diagonal maze pattern , we have considered `point 1` and `point 2`. These two points are the edges of diagonal ends of above pattern . So if bot had to move diagonally we can check for readings at these two points and conrol the bot accordingly.
+
 
 ---
 
