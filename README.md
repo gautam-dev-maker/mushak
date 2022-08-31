@@ -76,12 +76,14 @@ We designed the smallest micromouse that is based on STM32F405RG microcontroller
 
 ### Major components used in the PCB include -
 
-- STM32F405RG - Microcontroller
-- VL6180x - ToF sensor4
-- DRV8833 - Motor Driver
-- MPU6500 - IMU
-- SFH-4045N - Infrared Emitter
-- SFH-3015-FA - Phototransistor (Reciever)
+|     Components        |          Description          |
+| --------------------- | ----------------------------- |
+| STM32F405RG           | Microcontroller |
+| VL6180x | ToF sensor4 |
+| DRV8833 | Motor Driver |
+| MPU6500 | IMU |
+| SFH-4045N | Infrared Emitter |
+| SFH-3015-FA | Phototransistor (Reciever) |
 
 
 ---
@@ -396,7 +398,7 @@ make flash  # Currently only st-link support is added
 * [Phase-lead controller](https://micromouseonline.com/2011/05/16/designing-a-phase-lead-controller/) an alternative to PID control systems for micromouse.
 * [Slip Compensation](https://robotics.stackexchange.com/questions/1658/implementing-slip-compensation-into-a-half-size-micromouse) discussion on how to compensate slip in micromouse which becomes a serious issue
 * [Kerise v5](https://github.com/kerikun11/micromouse-kerise-v5) Smallest micromouse ever made, contains good documentation of design,pcb and code.
-* [SolidWorks Tutorial](https://www.youtube.com/watch?v=Ulttc_2p4DY&list=PLrOFa8sDv6jcp8E3ayUFZ4iNI8uuPjXHe) to sharpen you skills in SolidWorks.
+* [SolidWorks Tutorial](https://www.youtube.com/watch?v=Ulttc_2p4DY&list=PLrOFa8sDv6jcp8E3ayUFZ4iNI8uuPjXHe) to sharpen your skills in SolidWorks.
 
 # Acknowledgements
 * [SRA VJTI](http://sravjti.in) for providing us with required resources and support.
