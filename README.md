@@ -116,7 +116,7 @@ As can be seen in the image above we have visualised 2 cell based maze and bot i
 * `IR3` (pink rays) is pointing to the right end of current cell.
 * `IR4` (green rays) is pointing to the right end of current cell.
 
-To move the bot in straight line along the diagonal maze pattern , we have considered `point 1` and `point 2`. These two points are the edges of diagonal ends of above pattern . So if bot had to move diagonally we can check for readings at these two points and conrol the bot accordingly.
+To move the bot in straight line along the diagonal maze pattern , we have considered `point 1` and `point 2`. These two points are the edges of diagonal ends of above pattern . So if bot had to move diagonally we can check for readings at these two points and control the bot accordingly.
 
 
 ---
