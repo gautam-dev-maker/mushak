@@ -107,7 +107,7 @@ By varying the PWM duty cycle we can control the intensity of the transmitted li
 
 Placing IR sensors pose a challenge, and required rigorous testing and brain storming. 
 
-![](./assets/ir_placment.png)
+![](./assets/ir_placement.png)
 
 As can be seen in the image above we have visualised 2 cell based maze and bot is placed in first cell.
 
