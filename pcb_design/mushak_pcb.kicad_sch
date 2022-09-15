@@ -1345,6 +1345,7 @@
     )
   )
 
+
   (junction (at 266.7 16.51) (diameter 0) (color 0 0 0 0)
     (uuid 028d3caf-5f7a-4dad-bfc8-cf537e962269)
   )
@@ -4883,6 +4884,12 @@
     (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/cb2f20e9-8171-4004-84b9-b32192ed8592"
       (reference "C39") (unit 1) (value "1uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
+    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/6603e283-dd0a-4359-af49-ef33ef083aed"
+      (reference "C40") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+    )
+    (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/18367230-0a38-4eff-bb05-08264401c57d"
+      (reference "C41") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+    )
     (path "/f5e376f5-6e86-479b-8435-43919d6f658a"
       (reference "D1") (unit 1) (value "LED") (footprint "LED_SMD:LED_0402_1005Metric")
     )
@@ -4903,12 +4910,6 @@
     )
     (path "/c5cc4bf4-9ee5-4cd3-99aa-090226debfd4"
       (reference "FB1") (unit 1) (value "120R") (footprint "Inductor_SMD:L_0805_2012Metric")
-    )
-    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/4b226b7d-be78-425f-b1ce-8e70ec41b653"
-      (reference "IC1") (unit 1) (value "AS5600-ASOT") (footprint "AS5600-ASOT:SOIC127P600X175-8N")
-    )
-    (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/e06da04c-ba9b-4e8b-bbb8-ee04081bbf73"
-      (reference "IC2") (unit 1) (value "AS5600-ASOT") (footprint "AS5600-ASOT:SOIC127P600X175-8N")
     )
     (path "/533065b9-0d82-495b-9749-a6ba34793884"
       (reference "J1") (unit 1) (value "Conn_01x04_Male") (footprint "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical")
@@ -4994,7 +4995,7 @@
     (path "/394a5bc1-b4b7-410b-b651-f51e65e3f246"
       (reference "R4") (unit 1) (value "220") (footprint "Resistor_SMD:R_0603_1608Metric")
     )
-    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/3e16d4ba-e599-4897-8843-819afcddbd29"
+    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/f6af20dd-691a-4762-941d-79a3ba132414"
       (reference "R5") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/706b9d50-a230-461d-9c56-b1bac712c670"
@@ -5003,7 +5004,7 @@
     (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/fbc52285-fc67-41f7-8e91-69bbb92219e5"
       (reference "R7") (unit 1) (value "100") (footprint "Resistor_SMD:R_0603_1608Metric")
     )
-    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/48a05016-cd64-42a7-a0d5-9bc158567bfb"
+    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/e1066d75-f29a-4572-a366-7a3e829b2ba7"
       (reference "R8") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/7e12b85d-154c-4ed4-a981-b4528b43514d"
@@ -5069,6 +5070,9 @@
     (path "/b1e4f09a-9edc-40e1-aca7-79bdafa4d226"
       (reference "U1") (unit 1) (value "BA30BC0FP-E2") (footprint "IPD50P04P4L-11:DPAK228P998X235-3N")
     )
+    (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/8b6647db-a019-4f93-acc7-73199f9d3acc"
+      (reference "U2") (unit 1) (value "AS5048B-HTSP") (footprint "AS5048B-HTSP:SOP65P640X120-14N")
+    )
     (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/be34235a-8b1b-4baa-b1d4-fa29a6718129"
       (reference "U3") (unit 1) (value "DRV8833PW") (footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
     )
@@ -5080,6 +5084,9 @@
     )
     (path "/931924d2-29ec-4b79-8b1b-53bcef055c8a"
       (reference "U6") (unit 1) (value "STM32F405RGTx") (footprint "Package_QFP:LQFP-64_10x10mm_P0.5mm")
+    )
+    (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/4ea49432-336d-48e9-bfbe-d2d4b53771d2"
+      (reference "U7") (unit 1) (value "AS5048B-HTSP") (footprint "AS5048B-HTSP:SOP65P640X120-14N")
     )
     (path "/563b355b-9ea5-40ef-9191-d5756498a170"
       (reference "Y1") (unit 1) (value "25Mhz") (footprint "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm")

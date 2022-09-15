@@ -1,0 +1,25 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# SMT-0440-T-R
+#
+DEF SMT-0440-T-R LS 0 40 Y Y 1 L N
+F0 "LS" -200 200 50 H V L BNN
+F1 "SMT-0440-T-R" -200 -300 50 H V L BNN
+F2 "XDCR_SMT-0440-T-R" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "PUI Audio" 0 0 50 H I L BNN "MANUFACTURER"
+DRAW
+A -200 0 200 2699 4500 0 0 10 N -200 200 -200 -200
+P 2 0 0 10 -200 200 -200 -200 N
+P 2 0 0 10 0 100 -26 100 N
+P 2 0 0 10 -26 100 -26 100 N
+P 2 0 0 10 0 -100 -26 -100 N
+X 1 1 200 100 200 L 40 40 0 0 P 
+X 2 2 200 -100 200 L 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

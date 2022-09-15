@@ -1,0 +1,28 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# TL1015AF160QG
+#
+DEF TL1015AF160QG S 0 40 Y N 1 L N
+F0 "S" -200 250 50 H V L BNN
+F1 "TL1015AF160QG" -200 -200 50 H V L BNN
+F2 "SW_TL1015AF160QG" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "F" 0 0 50 H I L BNN "PARTREV"
+F5 "E-Switch" 0 0 50 H I L BNN "MANUFACTURER"
+F6 "2.1 mm" 0 0 50 H I L BNN "MAXIMUM_PACKAGE_HEIGHT"
+F7 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+DRAW
+C -100 0 10 0 0 20 N
+C 100 0 10 0 0 20 N
+P 2 0 0 10 -150 50 0 50 N
+P 2 0 0 10 0 50 150 50 N
+P 2 0 0 10 0 50 0 200 N
+X ~ 1 -300 0 200 R 40 40 0 0 P 
+X ~ 2 300 0 200 L 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

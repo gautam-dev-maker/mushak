@@ -12,4 +12,5 @@
   (lib (name "ABS07-32")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/ABS07-32.768KHZ-T")(options "")(descr ""))
   (lib (name "TL1015AF160QG")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/TL1015AF160QG")(options "")(descr ""))
   (lib (name "IPD50P04P4L-11")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/IPD50P04P4L-11")(options "")(descr ""))
+  (lib (name "AS5048B-HTSP")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/AS5048B-HTSP")(options "")(descr ""))
 )

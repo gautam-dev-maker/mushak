@@ -1,0 +1,41 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# SFH_3015_FA
+#
+DEF SFH_3015_FA A 0 40 N N 1 L N
+F0 "A" -400 200 50 H V L BNN
+F1 "SFH_3015_FA" -400 -300 50 H V L BNN
+F2 "XDCR_SFH_3015_FA" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "1.8 mm" 0 0 50 H I L BNN "MAXIMUM_PACKAGE_HEIGHT"
+F5 "OSRAM" 0 0 50 H I L BNN "MANUFACTURER"
+F6 "1.6" 0 0 50 H I L BNN "PARTREV"
+F7 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+DRAW
+P 2 0 0 6 -195 100 -125 30 N
+P 2 0 0 6 -125 30 -170 45 N
+P 2 0 0 6 -170 45 -140 75 N
+P 2 0 0 6 -140 75 -125 30 N
+P 2 0 0 6 90 -90 100 -100 N
+P 4 0 0 6 -170 45 -125 30 -140 75 -170 45 f
+C 50 0 125 0 0 10 N
+P 2 0 0 10 0 75 0 25 N
+P 2 0 0 10 0 25 0 -25 N
+P 2 0 0 10 0 -25 0 -75 N
+P 2 0 0 10 0 -25 100 -100 N
+P 2 0 0 10 0 25 100 100 N
+P 4 0 0 10 100 -100 90 -60 60 -100 100 -100 f
+P 2 0 0 6 -195 25 -125 -45 N
+P 2 0 0 6 -125 -45 -170 -30 N
+P 2 0 0 6 -170 -30 -140 0 N
+P 2 0 0 6 -140 0 -125 -45 N
+P 4 0 0 6 -170 -30 -125 -45 -140 0 -170 -30 f
+X ~ 1 100 -200 100 U 40 40 0 0 P 
+X ~ 2 100 200 100 D 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

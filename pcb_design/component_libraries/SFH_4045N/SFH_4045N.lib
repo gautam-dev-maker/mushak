@@ -1,0 +1,42 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# SFH_4045N
+#
+DEF SFH_4045N D 0 40 Y N 1 L N
+F0 "D" -200 200 50 H V L BNN
+F1 "SFH_4045N" -200 -200 50 H V L BNN
+F2 "LED_SFH_4045N" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "1.3 mm" 0 0 50 H I L BNN "MAXIMUM_PACKAGE_HEIGHT"
+F5 "OSRAM Opto" 0 0 50 H I L BNN "MANUFACTURER"
+F6 "1.5" 0 0 50 H I L BNN "PARTREV"
+F7 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+DRAW
+P 2 0 0 10 -100 60 -100 -60 N
+P 2 0 0 10 -100 -60 0 0 N
+P 2 0 0 10 0 0 -100 60 N
+P 2 0 0 10 0 60 0 -60 N
+T 0 40 80 40 0 0 0 IR Normal 0 L B
+P 2 0 0 10 40 160 -30 80 N
+P 2 0 0 10 27 122 5 141 N
+P 2 0 0 10 5 141 40 160 N
+P 2 0 0 10 40 160 27 122 N
+P 2 0 0 10 27 122 28 151 N
+P 2 0 0 10 28 151 23 151 N
+P 2 0 0 10 12 138 21 144 N
+P 2 0 0 10 -9 164 -79 84 N
+P 2 0 0 10 -22 126 -44 145 N
+P 2 0 0 10 -44 145 -9 164 N
+P 2 0 0 10 -9 164 -22 126 N
+P 2 0 0 10 -22 126 -21 155 N
+P 2 0 0 10 -21 155 -26 155 N
+P 2 0 0 10 -37 142 -28 148 N
+X ~ 1 200 0 200 L 40 40 0 0 P 
+X ~ 2 -300 0 200 R 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

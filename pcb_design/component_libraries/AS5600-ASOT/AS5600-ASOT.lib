@@ -1,0 +1,37 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# AS5600-ASOT
+#
+DEF AS5600-ASOT IC 0 40 Y Y 1 L N
+F0 "IC" 250 200 50 H V L BNN
+F1 "AS5600-ASOT" 250 -500 50 H V L BNN
+F2 "SOIC127P600X175-8N" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "AS5600-ASOT" 0 0 50 H I L BNN "MANUFACTURER_PART_NUMBER"
+F5 "ams" 0 0 50 H I L BNN "MANUFACTURER_NAME"
+F6 "https://www.mouser.co.uk/ProductDetail/ams/AS5600-ASOT?qs=KTMMzrZdriGJpjhsnAEYBA%3D%3D" 0 0 50 H I L BNN "MOUSER_PRICE-STOCK"
+F7 "985-AS5600-ASOT" 0 0 50 H I L BNN "MOUSER_PART_NUMBER"
+F8 "Board Mount Hall Effect / Magnetic Sensors AS5600 Magnetic Sensor 12-Bit" 0 0 50 H I L BNN "DESCRIPTION"
+F9 "AS5600-ASOT" 0 0 50 H I L BNN "ARROW_PART_NUMBER"
+F10 "https://www.arrow.com/en/products/as5600-asot/ams-ag?region=nac" 0 0 50 H I L BNN "ARROW_PRICE-STOCK"
+F11 "1.75mm" 0 0 50 H I L BNN "HEIGHT"
+DRAW
+P 2 0 0 10 200 100 1000 100 N
+P 2 0 0 10 1000 -400 1000 100 N
+P 2 0 0 10 1000 -400 200 -400 N
+P 2 0 0 10 200 100 200 -400 N
+X VDD5V 1 0 0 200 R 40 40 0 0 B 
+X VDD3V3 2 0 -100 200 R 40 40 0 0 B 
+X OUT 3 0 -200 200 R 40 40 0 0 B 
+X GND 4 0 -300 200 R 40 40 0 0 B 
+X DIR 8 1200 0 200 L 40 40 0 0 B 
+X SCL 7 1200 -100 200 L 40 40 0 0 B 
+X SDA 6 1200 -200 200 L 40 40 0 0 B 
+X PGO 5 1200 -300 200 L 40 40 0 0 B 
+ENDDRAW
+ENDDEF
+#
+# End Library
