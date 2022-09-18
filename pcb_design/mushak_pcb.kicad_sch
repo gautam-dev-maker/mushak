@@ -1345,7 +1345,6 @@
     )
   )
 
-
   (junction (at 266.7 16.51) (diameter 0) (color 0 0 0 0)
     (uuid 028d3caf-5f7a-4dad-bfc8-cf537e962269)
   )
@@ -4496,10 +4495,10 @@
     (stroke (width 0.1524) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
     (uuid 21ce20a6-b7bb-4e01-a357-9d2d3872aa77)
-    (property "Sheet name" "AS5600_Right" (id 0) (at 143.51 22.1484 0)
+    (property "Sheet name" "AS5048_Right" (id 0) (at 143.51 22.1484 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "AS5600_right.kicad_sch" (id 1) (at 143.51 46.3046 0)
+    (property "Sheet file" "AS5048_right.kicad_sch" (id 1) (at 143.51 46.3046 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
   )
@@ -4520,10 +4519,10 @@
     (stroke (width 0.1524) (type solid) (color 0 0 0 0))
     (fill (color 0 0 0 0.0000))
     (uuid b79b66d4-5cc5-4098-8c09-408f16b669f0)
-    (property "Sheet name" "AS5600_Left" (id 0) (at 105.41 22.1484 0)
+    (property "Sheet name" "AS5048_Left" (id 0) (at 105.41 22.1484 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheet file" "AS5600_left.kicad_sch" (id 1) (at 105.41 46.3046 0)
+    (property "Sheet file" "AS5048_left.kicad_sch" (id 1) (at 105.41 46.3046 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
   )
@@ -4831,10 +4830,10 @@
       (reference "C21") (unit 1) (value "12.5pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
     (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/3c0c9c03-9063-4d7b-9973-5baea752bcbf"
-      (reference "C22") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C22") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
     (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/5c07921a-d9ee-4218-b14f-44f9225af66e"
-      (reference "C23") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C23") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
     (path "/33d216d7-8249-4d7f-8be9-47abab609a3e"
       (reference "C24") (unit 1) (value "0.1uF") (footprint "Capacitor_SMD:C_0402_1005Metric")

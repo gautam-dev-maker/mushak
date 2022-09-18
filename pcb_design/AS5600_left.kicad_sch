@@ -296,7 +296,6 @@
     )
   )
 
-
   (junction (at 153.416 92.456) (diameter 0) (color 0 0 0 0)
     (uuid cca811e8-bcd2-4d7e-8cb6-f321b42531a1)
   )
@@ -462,8 +461,8 @@
     (in_bom yes) (on_board yes)
     (uuid 5c07921a-d9ee-4218-b14f-44f9225af66e)
     (property "Reference" "C23" (id 0) (at 208.28 92.964 90))
-    (property "Value" "0.1uF" (id 1) (at 208.788 100.838 90))
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 206.0448 92.456 0)
+    (property "Value" "10uF" (id 1) (at 208.788 100.838 90))
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (id 2) (at 206.0448 92.456 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 207.01 96.266 0)
