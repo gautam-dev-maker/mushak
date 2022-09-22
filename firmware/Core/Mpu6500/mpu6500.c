@@ -1,8 +1,9 @@
 #include "mpu6500.h"
+#include "ble_logger.h"
 
 static SPI_HandleTypeDef hspi1;
 
-static uint8_t _buffer[13];
+static uint8_t _buffer[14];
 // static uint8_t _mag_adjust[3];
 
 __weak void MPU6500_OnActivate()
@@ -118,7 +119,7 @@ uint8_t MPU6500_Init()
     writeRegister(PWR_MGMNT_1, PWR_RESET);
     // wait for MPU-6500 to come back up
     HAL_Delay(10);
-    
+
     // select clock source to gyro
     writeRegister(PWR_MGMNT_1, CLOCK_SEL_PLL);
 
@@ -178,17 +179,113 @@ void MPU6500_SetDLPFBandwidth(DLPFBandwidth bandwidth)
     writeRegister(ACCEL_CONFIG2, bandwidth);
     writeRegister(CONFIG, bandwidth);
 }
+
+void compute_acce_angle(int16_t ax, int16_t ay, int16_t az, double *acce_angle)
+{
+    // acce_angle[0] = atan2(ay, sqrt(pow(ax, 2) + pow(az, 2))) * RAD_TO_DEG;
+    // acce_angle[1] = atan2(-ax, sqrt(pow(ay, 2) + pow(az, 2))) * RAD_TO_DEG;
+    acce_angle[0] = atan2(ay, az) * RAD_TO_DEG - 6.0;
+    acce_angle[1] = atan2(ax, az) * RAD_TO_DEG - 14.0;
+    BLE_LOG_I("MPU6500 acc x", "%.3lf\n", (acce_angle[0]));
+    BLE_LOG_I("MPU6500 acc y", "%.3lf\n", (acce_angle[1]));
+    BLE_LOG_I("MPU6500 acc z", "%.3lf\n", (acce_angle[2]));
+}
+
+// Compute the gyroscope angle using the raw data
+void compute_gyro_angle(int16_t gx, int16_t gy, int16_t gz, uint32_t dt, double *gyro_angle)
+{
+    // (1 / 131) sensitivity factor of Gyroscope: 1 degree rotation gives a reading of 131 units
+    // static float g_x = 0, g_y = 0, g_z = 0;
+    // g_x = g_x + ((float)gx * (float)dt) / 131.0;
+    // g_y = g_y + ((float)gy * (float)dt) / 131.0;
+    // g_z = g_z + ((float)gz * (float)dt) / 131.0;
+    gyro_angle[0] = (((double)gx * (double)dt) / 131.0) - 8;
+    gyro_angle[1] = (((double)gy * (double)dt) / 131.0) + 2;
+    gyro_angle[2] = ((double)gz * (double)dt) / 131.0;
+    BLE_LOG_I("MPU6500 gyro x", "%.3lf\n", (gyro_angle[0]));
+    BLE_LOG_I("MPU6500 gyro y", "%.3lf\n", (gyro_angle[1]));
+    BLE_LOG_I("MPU6500 gyro z", "%.3lf\n", (gyro_angle[2]));
+    /*
+        In case the roll angle varies widely when only the pitch angle changes, activate the following equations.
+        gyro_angle[0] = dt * (gx + gy * sin(gyro_angle[0]) * tan(gyro_angle[1]) + gz * cos(gyro_angle[0]) * tan(gyro_angle[1]));
+        gyro_angle[1] = dt * (gy * cos(gyro_angle[0]) - gz * sin(gyro_angle[0]));
+    */
+}
+
+void MPU6500_ComplementaryFilter(int16_t *acc_raw_val, int16_t *gyro_raw_val, double *complementary_angle, float *mpu_offset)
+{
+
+    static uint8_t is_initial_reading = 0;
+    double acce_angle[2];
+    double gyro_angle[3];
+    uint16_t dt;
+    HAL_InitTick(15);
+    static uint32_t timer;
+
+    if (is_initial_reading == 0)
+    {
+        is_initial_reading++;
+        compute_acce_angle(acc_raw_val[0], acc_raw_val[1], acc_raw_val[2], acce_angle);
+
+        for (int i = 0; i < 2; i++)
+            complementary_angle[i] = acce_angle[i] - mpu_offset[i];
+        complementary_angle[2] = 0;
+
+        timer = HAL_GetTick() / 1000;
+        return;
+    }
+    dt = (HAL_GetTick() / 1000) - timer;
+    timer = HAL_GetTick() / 1000;
+
+    compute_acce_angle(acc_raw_val[0], acc_raw_val[1], acc_raw_val[2], acce_angle);
+    compute_gyro_angle(gyro_raw_val[0], gyro_raw_val[1], gyro_raw_val[2], dt, gyro_angle);
+
+    for (int i = 0; i < 2; i++)
+    {
+        acce_angle[i] = acce_angle[i] - mpu_offset[i];
+        complementary_angle[i] = ALPHA * (gyro_angle[i]) + (1 - ALPHA) * acce_angle[i];
+    }
+    complementary_angle[2] = gyro_angle[2];
+    BLE_LOG_I("MPU6500 comp x", "%.3lf\n", (complementary_angle[0]));
+    BLE_LOG_I("MPU6500 comp y", "%.3lf\n", (complementary_angle[1]));
+    BLE_LOG_I("MPU6500 comp z", "%.3lf\n", (complementary_angle[2]));
+}
+
 /* read the data, each argiment should point to a array for x, y, and x */
 void MPU6500_GetData(int16_t *AccData, int16_t *GyroData)
 {
     // grab the data from the MPU6500
-    readRegisters(ACCEL_OUT, 13, _buffer);
+    // readRegisters(ACCEL_OUT, 14, _buffer);
+    readRegisters(0x3B, 1, &_buffer[0]);
+    readRegisters(0x3C, 1, &_buffer[1]);
+    readRegisters(0x3D, 1, &_buffer[2]);
+    readRegisters(0x3E, 1, &_buffer[3]);
+    readRegisters(0x3F, 1, &_buffer[4]);
+    readRegisters(0x40, 1, &_buffer[5]);
+
+    readRegisters(0x43, 1, &_buffer[6]);
+    readRegisters(0x44, 1, &_buffer[7]);
+    readRegisters(0x45, 1, &_buffer[8]);
+    readRegisters(0x46, 1, &_buffer[9]);
+    readRegisters(0x47, 1, &_buffer[10]);
+    readRegisters(0x48, 1, &_buffer[11]);
 
     // combine into 16 bit values
     AccData[0] = (((int16_t)_buffer[0]) << 8) | _buffer[1];
     AccData[1] = (((int16_t)_buffer[2]) << 8) | _buffer[3];
     AccData[2] = (((int16_t)_buffer[4]) << 8) | _buffer[5];
-    GyroData[0] = (((int16_t)_buffer[8]) << 8) | _buffer[9];
-    GyroData[1] = (((int16_t)_buffer[10]) << 8) | _buffer[11];
-    GyroData[2] = (((int16_t)_buffer[12]) << 8) | _buffer[13];
+    GyroData[0] = (((int16_t)_buffer[6]) << 8) | _buffer[7];
+    GyroData[1] = (((int16_t)_buffer[8]) << 8) | _buffer[9];
+    GyroData[2] = (((int16_t)_buffer[10]) << 8) | _buffer[11];
+    double complementaryAngle[3];
+    static float mpuOffset[3];
+    for (int i = 0; i < 3; i++)
+    {
+        complementaryAngle[i] = 0;
+        mpuOffset[i] = 0;
+    }
+    MPU6500_ComplementaryFilter(AccData, GyroData, complementaryAngle, mpuOffset);
+    // BLE_LOG_I("MPU6500 1", "%.3f\n", (complementaryAngle[0]));
+    // BLE_LOG_I("MPU6500 2", "%.3f\n", (complementaryAngle[1]));
+    // BLE_LOG_I("MPU6500 3", "%.3f\n", (complementaryAngle[2]));
 }
