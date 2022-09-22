@@ -4,10 +4,19 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "stm32f4xx_hal.h"
+#include <math.h>
 
 #define MPU6500_SPI hspi1
 #define MPU6500_CS_GPIO GPIOA
 #define MPU6500_CS_PIN GPIO_PIN_4
+#define ALPHA 0.8
+#define RAD_TO_DEG 57.2957795
+
+//
+#define ARM_CM_DEMCR (*(uint32_t *)0xE000EDFC)
+#define ARM_CM_DWT_CTRL (*(uint32_t *)0xE0001000)
+#define ARM_CM_DWT_CYCCNT (*(uint32_t *)0xE0001004)
+//
 
 static const uint8_t READWRITE_CMD = 0x80;
 static const uint8_t MULTIPLEBYTE_CMD = 0x40;
@@ -80,23 +89,23 @@ static const uint8_t FIFO_READ = 0x74;
 
 typedef enum GyroRange_
 {
-    GYRO_RANGE_250DPS = 0,
-    GYRO_RANGE_500DPS,
-    GYRO_RANGE_1000DPS,
-    GYRO_RANGE_2000DPS
+    GYRO_RANGE_250DPS = 0x00,
+    GYRO_RANGE_500DPS = 0x08,
+    GYRO_RANGE_1000DPS = 0x10,
+    GYRO_RANGE_2000DPS = 0x18
 } GyroRange;
 
 typedef enum AccelRange_
 {
-    ACCEL_RANGE_2G = 0,
-    ACCEL_RANGE_4G,
-    ACCEL_RANGE_8G,
-    ACCEL_RANGE_16G
+    ACCEL_RANGE_2G = 0x00,
+    ACCEL_RANGE_4G = 0x08,
+    ACCEL_RANGE_8G = 0x10,
+    ACCEL_RANGE_16G = 0x18
 } AccelRange;
 
 typedef enum DLPFBandwidth_
 {
-    DLPF_BANDWIDTH_184HZ = 0,
+    DLPF_BANDWIDTH_184HZ = 0x01,
     DLPF_BANDWIDTH_92HZ,
     DLPF_BANDWIDTH_41HZ,
     DLPF_BANDWIDTH_20HZ,
@@ -132,5 +141,13 @@ void MPU6500_SetDLPFBandwidth(DLPFBandwidth bandwidth);
 void MPU6500_SetGyroRange(GyroRange range);
 /* sets the accelerometer full scale range to values other than default */
 void MPU6500_SetAccelRange(AccelRange range);
+
+void compute_acce_angle(int16_t ax, int16_t ay, int16_t az, double *acce_angle);
+
+void compute_gyro_angle(int16_t gx, int16_t gy, int16_t gz, uint32_t dt, double *gyro_angle);
+
+void MPU6500_ComplementaryFilter(int16_t *acc_raw_val, int16_t *gyro_raw_val, double *complementary_angle, float *mpu_offset);
+
+
 
 #endif /* MPU6500_H */
