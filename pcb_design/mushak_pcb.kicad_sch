@@ -1973,6 +1973,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 7b2fb17a-84ac-4d55-818f-1a98ded30ed0)
   )
+  (wire (pts (xy 108.966 147.32) (xy 113.03 147.32))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 7b45487e-30c5-4b7c-a514-0010d38192a5)
+  )
   (wire (pts (xy 48.26 45.974) (xy 50.8 45.974))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 7c0c8fdc-a116-4db4-a277-9cb2c36eafda)
@@ -2400,7 +2404,7 @@
     (uuid ed028501-ca99-4b74-bf4f-ad6d894aeed5)
   )
 
-  (wire (pts (xy 97.155 147.32) (xy 113.03 147.32))
+  (wire (pts (xy 97.155 147.32) (xy 101.346 147.32))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid efb219c2-646e-468d-a1eb-c0151584c7bc)
   )
@@ -3846,6 +3850,21 @@
     (pin "9" (uuid 253f00fd-d6e9-4cc4-b91b-fd1f36cb07a7))
   )
 
+  (symbol (lib_id "Device:R") (at 105.156 147.32 270) (unit 1)
+    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (uuid 96eb8848-8d99-4323-a927-23b24186bfdc)
+    (property "Reference" "R31" (id 0) (at 105.156 141.224 90))
+    (property "Value" "150" (id 1) (at 105.156 143.764 90))
+    (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (id 2) (at 105.156 145.542 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 105.156 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a98ed9c2-5abe-4d8b-b14d-65dab2b72a38))
+    (pin "2" (uuid 5c6297d7-73c9-49a2-8af3-abad636af217))
+  )
+
   (symbol (lib_id "Device:C") (at 270.51 93.98 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 9a62f6fe-2d57-40bb-8158-d497474eadbd)
@@ -5059,6 +5078,21 @@
     )
     (path "/f1b30f82-12f7-4cee-a306-ddb179776838"
       (reference "R26") (unit 1) (value "10k") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/247a1da8-04cf-4a61-9d87-cedbd5bdee00"
+      (reference "R27") (unit 1) (value "150") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/bf131b8a-7170-4c33-8ede-edaf3279adb8"
+      (reference "R28") (unit 1) (value "150") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/a5786716-06ae-48c1-b6d5-92f8121dcc19"
+      (reference "R29") (unit 1) (value "150") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/d3d22231-fa9b-4591-9863-4fcf67893a0c/18af4732-76c9-479b-83fc-1018c327dd6b"
+      (reference "R30") (unit 1) (value "150") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/96eb8848-8d99-4323-a927-23b24186bfdc"
+      (reference "R31") (unit 1) (value "150") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/b266ad3c-1d50-4b2b-8a1e-c69f93195963"
       (reference "SW1") (unit 1) (value "SW_Push") (footprint "TL1015AF160QG:SW_TL1015AF160QG")
