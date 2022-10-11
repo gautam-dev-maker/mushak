@@ -489,7 +489,7 @@
     (property "Reference" "R25" (id 0) (at 133.35 82.042 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "47k" (id 1) (at 132.334 85.598 90)
+    (property "Value" "4.7k" (id 1) (at 132.334 85.598 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (id 2) (at 133.858 83.82 90)
