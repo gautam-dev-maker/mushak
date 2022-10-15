@@ -3097,7 +3097,7 @@
     (property "Reference" "C20" (id 0) (at 26.67 153.5429 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "12.5pF" (id 1) (at 25.146 156.464 0)
+    (property "Value" "12pF" (id 1) (at 25.146 156.464 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 24.5872 157.988 0)
@@ -3485,7 +3485,7 @@
     (property "Reference" "C21" (id 0) (at 43.688 152.146 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "12.5pF" (id 1) (at 40.386 156.972 0)
+    (property "Value" "12pF" (id 1) (at 40.386 156.972 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (id 2) (at 47.7012 157.988 0)
@@ -4843,10 +4843,10 @@
       (reference "C19") (unit 1) (value "1uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
     (path "/24daa530-52f3-4b5d-b3e4-9566134f88a7"
-      (reference "C20") (unit 1) (value "12.5pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C20") (unit 1) (value "12pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
     (path "/52577cb3-f0fb-427a-8f19-6df3d1f7745e"
-      (reference "C21") (unit 1) (value "12.5pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+      (reference "C21") (unit 1) (value "12pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
     (path "/21ce20a6-b7bb-4e01-a357-9d2d3872aa77/3c0c9c03-9063-4d7b-9973-5baea752bcbf"
       (reference "C22") (unit 1) (value "10uF") (footprint "Capacitor_SMD:C_0603_1608Metric")
