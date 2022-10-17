@@ -4659,9 +4659,6 @@
     (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/4cf2ba93-936f-4109-8f3b-06e6c7d76341"
       (reference "#PWR015") (unit 1) (value "GND") (footprint "")
     )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/d6419c90-c100-4143-b700-0e57099da765"
-      (reference "#PWR016") (unit 1) (value "GND") (footprint "")
-    )
     (path "/cb44acba-527a-4750-b41f-72d265c3f4c8/f64ac16e-0fb6-472a-8013-acf9608163e1"
       (reference "#PWR017") (unit 1) (value "GND") (footprint "")
     )
@@ -4737,11 +4734,14 @@
     (path "/cf3bc6c5-7c51-4f1d-a0a7-8d4d995bbd01"
       (reference "#PWR041") (unit 1) (value "GND") (footprint "")
     )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/22163d05-c970-4e11-a66a-af3e7525b62c"
+    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/2e0548f4-9432-4974-8821-6e5fa324c203"
       (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
     )
     (path "/19b42e31-1557-4b0b-940f-ed7828b5f3d4"
       (reference "#PWR0102") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/fbeecc49-add0-463d-889e-b9ee82a880cc"
+      (reference "#PWR0103") (unit 1) (value "GND") (footprint "")
     )
     (path "/1657f9f1-2110-42f2-b15a-38df96205368"
       (reference "#PWR0105") (unit 1) (value "GND") (footprint "")
@@ -5106,8 +5106,8 @@
     (path "/b79b66d4-5cc5-4098-8c09-408f16b669f0/8b6647db-a019-4f93-acc7-73199f9d3acc"
       (reference "U2") (unit 1) (value "AS5048B-HTSP") (footprint "AS5048B-HTSP:SOP65P640X120-14N")
     )
-    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/be34235a-8b1b-4baa-b1d4-fa29a6718129"
-      (reference "U3") (unit 1) (value "DRV8833PW") (footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
+    (path "/ed054e13-fb35-4e88-891e-47af6a8dfbd6/13c819cd-642d-44e4-ba4f-346dcfd684d1"
+      (reference "U3") (unit 1) (value "DRV8833PWPR") (footprint "IC_DRV8833PWPR")
     )
     (path "/2c73dddc-4bab-40a4-8c83-c5c599e93cb7/45bb7dd5-b462-4d0a-aee1-0b30867fc184"
       (reference "U4") (unit 1) (value "VL6180XV0NR/1") (footprint "VL6180XV0NR_1:LGA12R75P2X6_280X480X110")

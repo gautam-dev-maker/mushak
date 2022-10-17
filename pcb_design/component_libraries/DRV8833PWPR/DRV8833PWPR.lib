@@ -1,0 +1,47 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# DRV8833PWPR
+#
+DEF DRV8833PWPR U 0 40 Y Y 1 L N
+F0 "U" -600 1139 50 H V L BNN
+F1 "DRV8833PWPR" -600 -1157 50 H V L BNN
+F2 "IC_DRV8833PWPR" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "None" 0 0 50 H I L BNN "PRICE"
+F5 "E" 0 0 50 H I L BNN "PARTREV"
+F6 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+F7 "HTSSOP-16 Texas Instruments" 0 0 50 H I L BNN "PACKAGE"
+F8 "https://snapeda.com/shop?store=DigiKey&id=377881" 0 0 50 H I L BNN "DIGIKEY-PURCHASE-URL"
+F9 "10.8-V, 2-A dual H-bridge motor driver with current regulation 16-HTSSOP -40 to 85" 0 0 50 H I L BNN "DESCRIPTION"
+F10 "https://snapeda.com/shop?store=Mouser&id=377881" 0 0 50 H I L BNN "MOUSER-PURCHASE-URL"
+F11 "https://snapeda.com/shop?store=Texas+Instruments&id=377881" 0 0 50 H I L BNN "TEXAS_INSTRUMENTS-PURCHASE-URL"
+F12 "DRV8833PWPR" 0 0 50 H I L BNN "MP"
+F13 "Texas Instruments" 0 0 50 H I L BNN "MANUFACTURER"
+F14 "1.2mm" 0 0 50 H I L BNN "MAXIMUM_PACKAGE_HEIGHT"
+F15 "Warning" 0 0 50 H I L BNN "AVAILABILITY"
+DRAW
+S -600 -1000 600 1100 0 0 16 f
+X AISEN 3 800 -400 200 L 40 40 0 0 B 
+X BISEN 6 800 -500 200 L 40 40 0 0 B 
+X AOUT1 2 800 200 200 L 40 40 0 0 O 
+X AOUT2 4 800 100 200 L 40 40 0 0 O 
+X BOUT1 7 800 -100 200 L 40 40 0 0 O 
+X BOUT2 5 800 -200 200 L 40 40 0 0 O 
+X NSLEEP 1 -800 400 200 R 40 40 0 0 I 
+X VINT 14 -800 1000 200 R 40 40 0 0 W 
+X VM 12 -800 900 200 R 40 40 0 0 W 
+X VCP 11 -800 600 200 R 40 40 0 0 B 
+X AIN1 16 -800 200 200 R 40 40 0 0 I 
+X AIN2 15 -800 100 200 R 40 40 0 0 I 
+X BIN1 9 -800 -100 200 R 40 40 0 0 I 
+X BIN2 10 -800 -200 200 R 40 40 0 0 I 
+X ~NFAULT 8 800 400 200 L 40 40 0 0 O 
+X EXP 17 800 -800 200 L 40 40 0 0 P 
+X GND 13 800 -900 200 L 40 40 0 0 W 
+ENDDRAW
+ENDDEF
+#
+# End Library

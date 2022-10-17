@@ -9,4 +9,5 @@
   (lib (name "New_Library")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/mushak_mount_footprint/New_Library.kicad_sym")(options "")(descr ""))
   (lib (name "BA30BC0FP-E2")(type "KiCad")(uri "${KIPRJMOD}/component_libraries/IPD50P04P4L-11/BA30BC0FP-E2.kicad_sym")(options "")(descr ""))
   (lib (name "AS5048B-HTSP")(type "Legacy")(uri "${KIPRJMOD}/component_libraries/AS5048B-HTSP/AS5048B-HTSP.lib")(options "")(descr ""))
+  (lib (name "DRV8833PWPR")(type "Legacy")(uri "${KIPRJMOD}/component_libraries/DRV8833PWPR/DRV8833PWPR.lib")(options "")(descr ""))
 )
