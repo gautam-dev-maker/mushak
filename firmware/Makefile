@@ -47,6 +47,7 @@ Core/As5600/as5600.c \
 Core/Ble_logger/ble_logger.c \
 Core/Drv8833/drv8833.c \
 Core/Peripheral/I2c/i2c.c \
+Core/Peripheral/Adc/adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
@@ -150,6 +151,7 @@ C_INCLUDES =  \
 -ICore/Ble_logger/ \
 -ICore/Mpu6500/ \
 -ICore/As5600/ \
+-ICore/Peripheral/Adc \
 -ICore/Drv8833/
 
 

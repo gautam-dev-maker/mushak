@@ -28,10 +28,10 @@
 #include "mpu6500.h"
 #include "as5600.h"
 #include "drv8833.h"
+#include "adc.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-// static void MX_TIM1_Init(void);
 
 void mpu6500_task(void *arg)
 {
@@ -105,6 +105,20 @@ void drv8833_task(void *param)
   }
 }
 
+void adc_task(void *param)
+{
+  adc_init();
+  uint32_t adc_val[2];
+  while (1)
+  {
+    adc_val[0] = get_adc_readings(ADC_CHANNEL_0);
+    adc_val[1] = get_adc_readings(ADC_CHANNEL_1);
+
+    BLE_LOG_I("ADC", "%d\t%d\n", adc_val[0], adc_val[1]);
+    HAL_Delay(10);
+  }
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -117,13 +131,15 @@ int main(void)
 
   ble_init(USART1);
 
-  xTaskCreate(vl6180x_task, "T1", 1024, NULL, 1, NULL);
+  // xTaskCreate(vl6180x_task, "T1", 1024, NULL, 1, NULL);
 
-  xTaskCreate(mpu6500_task, "T2", 1024, NULL, 1, NULL);
+  // xTaskCreate(mpu6500_task, "T2", 1024, NULL, 1, NULL);
 
-  xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
+  // xTaskCreate(&as5600_task, "AS5600 Task", 1024, NULL, 2, NULL);
 
-  xTaskCreate(&drv8833_task, "DRV8833 Task", 1024, NULL, 2, NULL);
+  // xTaskCreate(&drv8833_task, "DRV8833 Task", 1024, NULL, 2, NULL);
+
+  xTaskCreate(&adc_task, "ADC Task", 1024, NULL, 2, NULL);
 
   vTaskStartScheduler();
 }
