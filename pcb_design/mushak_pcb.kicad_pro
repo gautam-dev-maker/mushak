@@ -34,8 +34,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.3,
-          "height": 2.0,
-          "width": 0.5
+          "height": 1.5,
+          "width": 0.9
         },
         "silk_line_width": 0.049999999999999996,
         "silk_text_italic": false,
@@ -401,9 +401,6 @@
         "microvia_drill": 0.07,
         "name": "0.15mm",
         "nets": [
-          "/VL6180x/GND_s",
-          "/VL6180x/SCL_s",
-          "/VL6180x/SDA_s",
           "BAT_VOL",
           "BUZZER_OP",
           "DEBUG",
@@ -498,7 +495,7 @@
     ],
     [
       "2c73dddc-4bab-40a4-8c83-c5c599e93cb7",
-      "VL6180x"
+      "VL53L0x"
     ],
     [
       "cb44acba-527a-4750-b41f-72d265c3f4c8",

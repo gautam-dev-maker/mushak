@@ -516,7 +516,7 @@
   (symbol (lib_id "Device:R") (at 171.45 91.44 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 4f9eace5-9c74-4f7c-a2af-a1e26b048936)
-    (property "Reference" "R33" (id 0) (at 167.64 88.9 90)
+    (property "Reference" "R33" (id 0) (at 168.91 88.9 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "4.7k" (id 1) (at 169.418 91.44 90)
