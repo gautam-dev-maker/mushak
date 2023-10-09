@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2022 STMicroelectronics.
+  * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -48,7 +48,7 @@ extern "C" {
 /* USER CODE BEGIN EM */
 
 /* USER CODE END EM */
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,6 +57,15 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DRV8833_EN_Pin GPIO_PIN_2
+#define DRV8833_EN_GPIO_Port GPIOB
+#define DEBUG_LED_Pin GPIO_PIN_10
+#define DEBUG_LED_GPIO_Port GPIOA
+#define MPU6500_CS_Pin GPIO_PIN_11
+#define MPU6500_CS_GPIO_Port GPIOA
+#define DEBUG_BTN_Pin GPIO_PIN_12
+#define DEBUG_BTN_GPIO_Port GPIOA
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
