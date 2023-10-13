@@ -69,6 +69,11 @@ void set_log_level(stm32_log_level_t log_level);
             printf("(%ld) %s: %s(%d):" fmt, HAL_GetTick(), TAG, __FUNCTION__, __LINE__,  __VA_ARGS__); \
             printf("\n");
 
+#define HAL_ERROR_CHECK(a, statement, ret) \
+            if (!(a)) { \
+                LOGE(TAG, "%s", statement); \
+                return ret; \
+            }
 #ifdef __cplusplus
 }
 #endif

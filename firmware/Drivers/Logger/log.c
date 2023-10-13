@@ -33,11 +33,11 @@ static void MX_USART2_UART_Init(void)
 
 void set_log_level(stm32_log_level_t log_level) {
     if (!logger_initialised) {
-    #ifdef SEMIHOSTING
+#ifdef SEMIHOSTING
         initialise_monitor_handles();
-    #else
+#else
         MX_USART2_UART_Init();
-    #endif
+#endif
         logger_initialised = true; 
     }
     switch(log_level) {
