@@ -19,19 +19,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "timers.h"
-#include "queue.h"
-#include "semphr.h"
-#include "event_groups.h"
+#include "cmsis_os.h"
 #include "adc.h"
 #include "i2c.h"
-#include "tim.h"
 #include "gpio.h"
 
 #include "log.h"
-#include "mpu6500.h"
+#include "drv8833.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -102,25 +97,22 @@ int main(void)
   MX_I2C1_Init();
   MX_I2C2_Init();
   MX_I2C3_Init();
-  MX_TIM3_Init();
-  MX_TIM10_Init();
-  MX_TIM11_Init();
-  MX_TIM12_Init();
-  MX_TIM13_Init();
 
-  mpu6500_init();
-  int16_t acc_data[3], gyro_data[3]; 
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
   /* Call init function for freertos objects (in freertos.c) */
   // MX_FREERTOS_Init();
-    while(1) {
-        mpu6500_get_data(acc_data, gyro_data);
-        LOGI("MPU6500", "Gyro Data is: %d", gyro_data[0]);
-        LOGI("MPU6500", "Gyro Data is: %d", gyro_data[1]);
-        LOGI("MPU6500", "Gyro Data is: %d", gyro_data[2]);
-        HAL_Delay(1000);
-    }
+
+  drv8833_init();
+  set_duty_cycle(MOTOR_L, FORWARD, 50);
+
+  while(1) {
+  }
+
   /* Start scheduler */
-  // osKernelStart();
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
@@ -183,6 +175,27 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM1 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

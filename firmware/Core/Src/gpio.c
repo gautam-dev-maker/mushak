@@ -54,9 +54,6 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DRV8833_EN_GPIO_Port, DRV8833_EN_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, DEBUG_LED_Pin|MPU6500_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PC13 PC0 PC1 PC2
@@ -68,13 +65,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = DRV8833_EN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(DRV8833_EN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB12 PB13 */
   GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
